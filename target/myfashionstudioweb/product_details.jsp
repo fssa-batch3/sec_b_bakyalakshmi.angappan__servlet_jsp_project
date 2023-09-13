@@ -19,8 +19,7 @@
 
 <h1>Product Details</h1>
 
-<% 	ProductService productService = new ProductService(); 	%>
-<% 	ProductDTO product = productService.findProductDetailsByProductId(23);	%>
+<% ProductDTO product = (ProductDTO)request.getAttribute("product");	%>
 
 <table border="1">
     <tr>

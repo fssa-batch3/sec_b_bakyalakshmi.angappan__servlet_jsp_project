@@ -1,0 +1,280 @@
+@charset "ISO-8859-1";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+
+}
+
+.leftside {
+    width: 50%;
+    height: 90vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: sticky;
+    top:130px;
+}
+
+.rightside {
+    font-family: 'Jost', sans-serif;
+    width: 50%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-top: 8%;
+}
+
+.rightside::-webkit-scrollbar {
+    display: none;
+}
+
+.rightside div {
+    margin-bottom: 2%;
+}
+
+/* leftside */
+
+.product_image {
+    /* margin-right: 10%;
+    width: 30%; */
+    margin-left: 20%;
+    position: sticky;
+    top:0px;
+}
+
+.product_image p {
+    color: #5a5a5a;
+    letter-spacing: 1px;
+}
+
+
+.product_image img {
+    width: 450px;
+    height: 600px;
+}
+
+/* rightside */
+
+.rightside .product_name {
+    text-transform: capitalize;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* prices */
+.rightside .prices div {
+    margin: 0;
+    padding-bottom: 1%;
+}
+
+.rightside .current_price {
+    text-transform: capitalize;
+    font-size: 28px;
+}
+
+
+.headingsize{
+        text-transform: capitalize;
+        font-weight: 500;
+        font-size: 20px;
+}
+
+
+/* radio button - size */
+
+.size {
+    text-transform: uppercase;
+    display: flex;
+    justify-items:center
+}
+
+
+
+.fa-solid{
+    float: right;
+}
+
+.size input[type=radio]:disabled+label {
+    background-color: #eee;
+}
+
+
+.sizecontainer {
+    visibility: hidden;
+    position: fixed;
+    top: 0px;
+    width: 98vw;
+    height: 100vh;
+    background-color: #00000075;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sizecontainer.openpopup {
+    visibility: visible;
+}
+
+.inputsizecontainer {
+    position: relative;
+    width: 45%;
+    padding: 1%;
+    z-index: 2;
+    background-color: #fff; /*        sizeDiv.appendChild(clearButton); */
+}
+
+input[type=radio] {
+    -webkit-appearance: none;
+}
+
+input[type=radio] + label{
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #000;
+    width: 100px;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 3rem;
+    margin-right: 0.5em;
+    text-align:center;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type=radio]:checked + label {
+    background-color: #000;
+    color: #fff;
+}
+
+input[type=radio]:not:checked + label {
+    background-color: #fff;
+    color: #fff;
+}
+
+
+
+
+.buttons div {
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+button.buynow {
+    font-family: 'Jost', sans-serif;
+    background-color: #222;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    width: 20em;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 3%;
+}
+
+button.buynow:hover {
+    background-color: #555;
+}
+
+
+.product_details h3 {
+    cursor: pointer;
+    padding-bottom: 3%;
+}
+
+.rightside .product_details {
+
+    text-align: left;
+    font-size: 18px;
+}
+
+.details_chev{
+    font-size: 25px;
+    margin-left: 40px;
+}
+
+.heading_top {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.heading_top h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.accordion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border-bottom: 1px solid #bbb;
+    width:85%;
+}
+
+.accordion:hover {
+    background-color: #eee;
+}
+
+.panel {
+    width:85%;
+    padding: 0 18px;
+    background-color: white;
+    overflow: hidden;
+    display:block;
+}
+
+.attribute-key{
+    margin:0px;
+    color: #555;
+    font-size: 14px;
+}
+
+.product_details div{
+    margin-bottom: 2%;
+}
+
+table{
+    width:100%;
+    text-align: center;
+}
+
+table tr:nth-child(odd) {
+    background-color: #F0F2F2;
+};
+
+table tr:nth-child(even) {
+    background-color: #FFF;
+};
+
+table tr {
+    padding: 7px 14px 6px;
+    border-bottom: 1px solid #BBBFBF;
+};
+
+td{
+    padding: 7px 14px 6px;
+        border-bottom: 1px solid #BBBFBF;
+}
+
+

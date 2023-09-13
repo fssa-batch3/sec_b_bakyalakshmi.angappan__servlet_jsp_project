@@ -1,3 +1,4 @@
+<%@page import="in.fssa.myfashionstudioapp.dto.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -5,17 +6,42 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>add-product</title>
+
+    <script>
+        function addSize() {
+            var container = document.getElementById("sizeContainer");
+            var sizeDiv = document.createElement("div");
+            sizeDiv.innerHTML = `
+                <label for="size">Size</label>
+		        <select name="size">
+		   			<option id="1" value="1">Xs</option>
+		   			<option id="2" value="2">S</option>
+		   			<option id="3" value="3">M</option>
+		   			<option id="4" value="4">L</option>
+		   		</select>
+                <label for="price">Price</label>
+                <input type="number" name="price"><br>
+            `;
+            container.appendChild(sizeDiv);
+        }
+    </script>
 </head>
 <body>
 
+<%-- <% if (request.getAttribute("errorMessages") != null) { %>
+    <div class="error">
+        <h2>Error(s) occurred:</h2>
+        <p><%= request.getAttribute("errorMessages") %></p>
+    </div>
+<% } %> --%>
+
 	<form action="create" method="post">
 		
-		<%-- get all genders  --%>
 		<label for="gender">Choose gender</label> 
 		
-		<select name="gender">
-			<option value="1">men</option>
-			<option value="2">women</option>
+		<select id="gender" name="gender">
+			<option id="1" value="1" selected >men</option>
+			<option id="2" value="2">women</option>
 		</select> <br> 
 		
 		
@@ -24,10 +50,10 @@
 		
 		
 		<select name="category">
-			<option value="1">T-shirts</option>
-			<option value="2">Shirts</option>
-			<option value="3">Jeans</option>
-			<option value="4">Trousers</option>
+			<option id="1" value="1">T-shirts</option>
+			<option id="2" value="2">Shirts</option>
+			<option id="3" value="3">Jeans</option>
+			<option id="4" value="4">Trousers</option>
 		</select> <br>
 		
 		<label for="name">Name</label><br> 
@@ -38,25 +64,13 @@
 		<label for="description">Description</label><br>
 		
 		<input type="text"  name="description"> <br> 
-		
-<!-- 		<label for="size">Choose size</label> 
-
-		<input type="checkbox" name="size" value="1"  value="xs">
-		<label for="1">XS</label>
-		
-		<input type="checkbox" name="size" value="2"  value="xl">
-		<label for="2">XL</label>
-		
-		<input type="checkbox" name="size" value="3"  value="l">
-		<label for="3">L</label> <br>  -->
-		
-		<label for="size">Size</label>
-		<input
-			type="number"  name="size">
-		
-		<label for="price">price</label>
-		<input
-			type="number"  name="price"> <br> 
+			
+ 		<input type="button" onclick="addSize()" value="+ Add Size"><br>
+			
+	 	<div id="sizeContainer">
+            
+        </div>
+	
 			
 		
 

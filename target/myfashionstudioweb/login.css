@@ -1,0 +1,117 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.container{
+    font-family: 'Jost', sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow: 6px #000;
+}
+
+img{
+    width:200px;
+    position:absolute;
+    bottom:80%;
+}
+
+.container-form{
+    position:relative;
+    font-family: 'Jost', sans-serif;
+    width:23%;
+    height:52%;
+    padding:2%;
+    background-color: white;
+    border:2px solid #eee;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+div.x-mark i{
+    color:#555;
+    float:right;
+    font-size:25px;
+    position: absolute;
+    top:3%;
+    right:4%;
+}
+.container-form h2{
+    font-weight: 500;
+    padding-top: 2%;
+    padding-bottom:6%;  
+    text-transform: capitalize;
+    font-size: 30px;
+}
+
+.container-form .label_field{
+    font-family: 'Jost', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding-bottom:2%;
+}
+
+.container-form .input_field{
+    padding:2%;
+}
+
+a.forgotpassword{
+    color: #000;
+    font-family: 'Jost', sans-serif;
+    text-transform: capitalize;
+    text-decoration: none;
+    margin-left: 4rem;
+}
+.container-form .input_field{
+    font-family: 'Jost', sans-serif;
+    width:100%;
+    height:30px;
+    border:1px solid #5a5a5a;
+    margin-top: 1%;
+}
+    
+.container_form div{
+    padding-bottom: 3%;
+}
+
+.container-form  button{
+    font-family: 'Jost', sans-serif;
+    margin-top: 15%;
+    font-size: 20px;
+    width:100%;
+    background-color:#000;
+    color:#fff;
+    padding:2%;
+    border:none;
+    border:1px solid #000;
+    border-radius: 5px;
+    letter-spacing: 2px;
+}
+
+.container-form div:last-child{
+    font-family: 'Jost', sans-serif;
+    width:100%;
+    padding-top: 1em;
+}
+
+.container-form div:last-child span{
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.container-form div:last-child a{ 
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+@media(max-width:360px){
+    .container-form{
+        width:80%;
+    }
+}
+

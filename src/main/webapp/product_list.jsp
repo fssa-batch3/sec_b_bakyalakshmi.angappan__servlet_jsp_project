@@ -1,70 +1,62 @@
 <%@page import="in.fssa.myfashionstudioapp.model.Price"%>
-<%@page import="in.fssa.myfashionstudioapp.service.PriceService"%>
 <%@page import="in.fssa.myfashionstudioapp.dto.ProductDTO"%>
-<%@page import="in.fssa.myfashionstudioapp.model.Product"%>
 <%@page import="java.util.List"%>
-<%@page import="in.fssa.myfashionstudioapp.service.ProductService"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>product-list</title>
+
+<link rel="stylesheet" href="product_list.css">
 </head>
-
-
 <body>
 
-	<h1>List of products</h1>
+    <!-- Include the header.jsp file here -->
+    <jsp:include page="header.jsp" />
 
-	<% List<ProductDTO> productList = (List<ProductDTO>)request.getAttribute("productList"); %>
-	
-	
+    <%
+    List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
+    %>
 
-	<table border="1">
+    <main>
+        <div class="heading_top">
+            <h3 class="heading_top_gender"></h3>
+            <h1 class="heading_top_category">all products</h1>
+            <small class="totalproduct"><%= productList.size() %> Items Found</small>
+        </div>
 
-		<tr>
-			<th>Id</th>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Category</th>
-			<th>Price</th>	
-			<th>Actions</th>	
-		</tr>
+        <div class="products">
+            <%
+            for (ProductDTO product : productList) {
+            %>
+            <a href="product?product_id=<%= product.getId() %>" style="width: 286px">
+                <div class="smallcontainer" >
+                    <div class="images">
+						<img class="product_image" src="<%= product.getImage() %>" alt="<%= product.getName() %>" style="width: 253px; height: 316px;">
+                    </div>
+                    <div class="names">
+                        <h4 class="product_name"><%= product.getName() %></h4>
+                    </div>
 
-	<% for(ProductDTO product : productList ){ %>
-		<tr>
-			<td><%= product.getId() %></td>
-			<td><%= product.getName() %></td>
-			<td><%= product.getDescription() %></td>
-			<td><%= product.getCategory().getName() %></td>
-			
-			<% List<Price> priceList =   product.getPriceList(); %>
+                    <%
+                    List<Price> priceList = product.getPriceList();
+                    for (Price price : priceList) {
+                    %>
+                    <div class="prices">
+                        <span class="size">size : <%= price.getSize().getValue() %></span> <span class="current_price">RS.<%= price.getPrice() %></span>
+                    </div>
+                    <%
+                    } // end priceList loop
+                    %>
+                </div>
+            </a>
+            <%
+            } // end productList loop
+            %>
+        </div>
+    </main>
 
-		<% for(Price price : priceList ){ %>
-			<td><%= price.getPrice() %></td>
-			<%} %>
-			
-			<td>
-			<a href="product/details?product_id=<%=product.getId()%>">
-			<button class="view" type="submit">View</button>
-			</a>
-			</td>
-				<td>
-			<a href="product/edit?product_id=<%=product.getId()%>">
-			<button type="submit">update</button>
-			</a>
-			</td>
-			<td>
-			<a href="">
-			<button type="submit">delete</button>
-			</a>
-			</td>
-	
-		</tr>
-	<%} %>
-
-	</table>
+    <div class="line"></div>
 </body>
 </html>

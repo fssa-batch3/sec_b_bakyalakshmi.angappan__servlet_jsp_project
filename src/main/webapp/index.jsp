@@ -1,23 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Fashion Studio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1> Hello -- ! </h1>
-<form action = "/product">
-		<label for="num1">Enter first number:</label><br> 
-		<input type="number"
-			id="num1" name="num1">
-			<br> 
-			
-			<label for="num2">Enter second number:</label><br> 
-			<input type="number" id="num2" name="num2">
-			<br> 
-			<input type="submit" name="submit" />
-</form>
+
+
+<div class="container">
+        <h1>Welcome to My Fashion Studio</h1>
+        <div class="button-container">
+            <a href="inventory" class="admin-button">Admin</a>
+            <a href="login" class="login-button">Login</a>
+        </div>
+</div>
+
 </body>
 </html>
