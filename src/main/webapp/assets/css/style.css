@@ -1,0 +1,634 @@
+@import "normalize.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    position: relative;
+    text-transform: capitalize;
+}
+
+/* container */
+div.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* banner1 */
+
+section.banner1 {
+    font-family: 'Jost', sans-serif;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    width: 100%;
+    /* background-color: #eee; */
+}
+
+.bannerone {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.bannerone .banner1sub {
+    font-family: 'Jost', sans-serif;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(90deg, #181c1d, #b4cdd1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid .bannerone .banner1sub div:nth-child(1),
+.container-fluid .bannerone .banner1sub div:nth-child(2) {
+    width: 50%;
+    height: 100%;
+}
+
+.firstimg {
+    width: 60%;
+    height: 100%;
+}
+
+.banner1sub div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.banner1sub div h1 {
+    margin-left: 7%;
+    margin-bottom: 5%;
+    color: #eee;
+    text-transform: capitalize;
+}
+
+.banner1sub div p {
+    text-transform: capitalize;
+    margin-left: 7%;
+    color: #eee;
+    font-size: 30px;
+    width: 80%
+}
+
+/* categories */
+
+.categories .categories_list div {
+    position: relative;
+    width: 10rem;
+}
+
+
+.categories .categories_list div h4 {
+    font-family: 'Jost', sans-serif;
+    position: absolute;
+    /* left: 9%; */
+    right: 5%;
+    bottom: 5%;
+    width: 80%;
+    padding: 3px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.884);
+}
+
+.container-fluid a {
+    color: #000;
+}
+
+.categories h1 {
+    margin-bottom: 1em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.categories .categories_list {
+  
+    width:100%;
+    overflow-x: scroll;
+    background-color: #eee;
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+
+}
+
+.categories img {
+    width: 180px;
+    border: 5px solid #fff;
+}
+
+/* deals */
+
+.deals h1 {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.deals .deals_list {
+    background-color: #eee;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+
+.deals .deals_list div {
+    position: relative;
+    width: 20rem;
+}
+
+div.deals .deals_list h4 {
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.895);
+    position: absolute;
+    top: 2%;
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 40%;
+    padding: 2%;
+}
+
+.deals .deals_list div h2 {
+    width: 90%;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.785);
+    left: 5%;
+    bottom: 4%;
+    padding: 2%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.deals_list img {
+    width: 20rem;
+    border: 5px solid #fff;
+}
+
+/* freedelivery */
+
+.delivery {
+    font-family: 'Jost', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    border: 2px solid #555;
+    margin-top: 2em;
+    padding: 2%;
+    text-transform: capitalize;
+    font-weight: 400;
+
+}
+section > div.delivery{
+    display: none;
+}
+
+.delivery i {
+    font-size: 50px;
+}
+
+/* fashion */
+
+.heading {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.banner {
+    width: 98.5vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.banner .bannersub {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(10deg, #fff, #000000cc);
+    border: 5px solid #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.bannersub div:nth-child(1),
+.bannersub div:nth-child(2) {
+    width: 30%;
+    height: 100%;
+}
+
+.bannersub h1:first-child {
+    text-transform: capitalize;
+    font-size: 40px;
+}
+
+.bannersub h1 span {
+    text-transform: capitalize;
+    font-size: 60px;
+}
+
+.bannersub h2 {
+    text-transform: capitalize;
+}
+
+.bannersub div:nth-child(2) {
+    background-color: #fff;
+    height: 80%;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px #555;
+    padding: 2%;
+}
+
+.bannersub div:nth-child(2) button {
+    background-color: #222;
+    color: #fff;
+    padding: 3%;
+    width: 40%;
+    position: absolute;
+    bottom: 10%;
+    left: 30%;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.bannersub div:nth-child(2) div{
+    margin-bottom: 10%;
+}
+/* 
+.bannersub div:nth-child(2) div:hover {
+    background-color: #555;
+} */
+
+.bannersub .image {
+    border: 1px solid #000;
+    width: 20rem;
+    padding: 2%;
+    box-shadow: 1px 2px 5px #000;
+    margin-top: 6%;
+}
+
+div.fashion_list {
+    background-color: #eee;
+      
+}
+
+div.fashion_categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    margin-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 3%;
+    width: 100%;
+    overflow-x: scroll;
+
+}
+
+div.fashion_categories div {
+    position: relative;
+}
+
+div.fashion_categories div div {
+
+    position: absolute;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.817);
+    left: 3%;
+    bottom: 6%;
+    text-align: center;
+    padding: 2%;
+}
+
+div.fashion_categories div div h2 {
+    margin: 0;
+    text-transform: uppercase;
+    padding-bottom: 1%;
+}
+
+div.fashion_categories div img {
+    margin-right: 10px;
+    border: 5px solid #fff;
+}
+
+div.fashion_categories div img:hover {
+    box-shadow: 2px 2px 5px #bbb;
+}
+
+/* features */
+
+div.features {
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin-top: 10%;
+    padding: 2%;
+    background-color: #fff;
+}
+
+div.features div {
+    text-align: center;
+}
+
+div.features div h2 {
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.features div i {
+    font-size: 40px;
+    padding-bottom: 20px;
+}
+
+#mobile-header {
+    display: none;
+}
+
+@media(max-width:360px) {
+    header#desktop-header {
+        display: none;
+    }
+
+    header#mobile-header {
+        display: flex;
+    }
+
+    body {
+        width: 100%;
+    }
+
+    header #mobile-header {
+        width: 100vw;
+    }
+
+    #mobile-header .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 10px 0 10px;
+    }
+
+    #mobile-icons a,
+    #mobile-icons i {
+        font-size: 20px;
+        padding-left: 8px;
+        margin-left: 0;
+
+    }
+
+    #mobile-header .navbar-toggler {
+        border: none;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+    }
+
+    .fashion .banner img {
+        display: none;
+    }
+
+    .navbar-brand img {
+        height: 40px;
+        width: 90px;
+    }
+
+    section.banner1 {
+        font-family: 'Jost', sans-serif;
+        width: 100%;
+        margin-top: 7%;
+        margin-bottom: 7%;
+    }
+
+    section.banner1 .bannerone {
+        height: 20vh;
+    }
+
+    .banner1 .banner1sub {
+        height: 100%;
+    }
+
+    .banner1sub div h1 {
+        margin-left: 2%;
+        margin-bottom: 1%;
+        color: #eee;
+        text-transform: capitalize;
+        font-size: 14px;
+    }
+
+    .banner1sub div p {
+        text-transform: capitalize;
+        margin-left: 2%;
+        color: #eee;
+        font-size: 12px;
+        width: 80%
+    }
+
+    .categories h1,
+    .container-fluid h1 {
+        font-size: 20px;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    .categories .categories_list {
+        padding: 4%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: initial;
+        overflow-x: scroll;
+
+    }
+
+        /* .deals .deals_list {
+        background-color: #eee;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: initial;
+        padding: 4%;
+        overflow-x: scroll;
+    */
+
+    .deals_list img {
+        width: 18rem;
+    }
+
+    .deals_list div {
+        margin: 0 7% 0 7%;
+    }
+
+    .delivery {
+        font-family: 'Jost', sans-serif;
+        text-align: center;
+        font-size: 19px;
+        border: 2px solid #555;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        padding: 2%;
+        text-transform: capitalize;
+        font-weight: 400;
+    }
+
+    .delivery i {
+        font-size: 20px;
+    }
+
+    div.fashion_categories {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: initial;
+        overflow-x: scroll;
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+
+    /* mobilefooter */
+    .footer_nav_contact {
+        padding-top: 5%;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin: 0;
+        align-items: center;
+        align-content: center;
+        text-transform: capitalize;
+    }
+
+    .footer_nav {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    }
+
+    .footer_nav div {
+        width: 40%;
+    }
+
+    .footer_contact {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: initial;
+        padding-left: 5%;
+    }
+
+    .footer_contact div {
+        width: 100%;
+    }
+
+    .footer_nav div h3 {
+        font-size: 18px;
+        padding-bottom: 2%;
+    }
+
+    .footer_nav ul {
+        padding-left: 2%;
+    }
+
+    .footer_nav ul a {
+        color: #555;
+    }
+
+    .footer {
+        margin-top: 10%;
+    }
+
+    .bottom_footer {
+        border-top: 1px solid #bbb;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 5%;
+    }
+
+    .footer_contact div h3 {
+        font-size: 18px;
+        padding-bottom: 0;
+    }
+
+    .footer_contact .contact_details {
+        padding-bottom: 1%;
+    }
+
+    .features {
+        display: none;
+    }
+
+    .socialmedia a i {
+        color: #555;
+        font-size: 18PX;
+        padding: 8px;
+    }
+
+    .bottom_footer {
+        border-top: 1px solid #bbb;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5%;
+        text-align: center;
+    }
+
+    .bottom_footer h2 {
+        font-size: 18px;
+    }
+
+    .bottom_footer div {
+        width: 100%;
+    }
+
+}

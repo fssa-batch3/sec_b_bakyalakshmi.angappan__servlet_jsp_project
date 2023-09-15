@@ -23,7 +23,8 @@ public class GetAllProductsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String category = request.getParameter("category");
-		System.out.println(category);
+		System.out.println("category " + category);
+
 		ProductService productService = new ProductService();
 		try {
 			List<ProductDTO> productList;

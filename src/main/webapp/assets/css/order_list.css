@@ -1,0 +1,262 @@
+@import "normalize.css";
+
+*{
+    margin:0;
+    padding:0;
+}
+
+p{
+    margin:0;
+    padding:0;
+}
+
+h3{
+    margin: 0;
+    padding: 0;
+}
+ body{
+    font-family: 'Jost', sans-serif;
+} 
+.heading_top{
+    font-family: 'Jost', sans-serif;
+    padding-top: 5%;
+    width: 74%;
+    margin-bottom: 40px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    margin-left: 13%;  
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1%;
+}
+
+.heading_top .searchbar{
+    font-family: 'Jost', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+ 
+.heading_top .searchbar .search_box input{
+    font-family: 'Jost', sans-serif;
+    width:100%;
+    height:80%;
+    padding:10px;
+    border: none;
+    background-color: #fff;
+    border-bottom: 1px solid #000; 
+};
+
+
+.heading_top .searchbar .button button{
+    border:none;
+    height:80%;
+    padding:10px;
+    background-color: #fff;
+    border-bottom: 1px solid #000;
+}
+
+.check{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 11px;
+    font-size: 12px;
+}
+
+.fullcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fluid-container{
+    width:75%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    background-color: #eee;
+    padding:20px;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+.product_delivery{
+    display: flex;
+    background-color:#FFF ;
+    flex-wrap: nowrap;
+    /* margin-bottom: 10px; */
+    padding: 4px;
+}
+
+.product_delivery i{
+    font-size: 25px;
+    width:6%;
+    text-align: center;
+    color: rgb(41, 69, 41);
+    margin-right: 4%;
+}
+.product_delivery p{
+    color:#555;
+    margin: 0;
+}
+
+.product_delivery .delivery_date{
+    width:94%;
+    padding-left:1%;
+}
+
+.delivery_date h3{
+    text-transform: capitalize;
+    font-size: 20px;
+    margin-bottom: 1px;
+}
+
+.delivery_date p{
+    margin-bottom: 5px;
+}
+
+.product_thumbnail{
+    width:8%;
+    margin-right:2%;
+}
+.product_thumbnail img{
+    width:5rem;
+    box-shadow: 0 2px 5px #bbb;
+}
+
+.product_details {
+    width:70%;
+    font-size: 18px;
+}
+
+.product_details p{
+    padding-top: 1%;
+    margin: 0;
+}
+
+.container{
+    margin-bottom: 20px;
+}
+.brand_name{
+    font-size: 18px;
+    margin-bottom: 0px;
+}
+.arrowmark {
+
+   display:flex;
+   flex-direction: row;
+   padding-left: 20%;
+   align-self: center;
+   
+}
+
+.arrowmark i{
+    color:#000;
+    font-size: 20px;
+}
+
+.order_list{
+    font-family: 'Jost', sans-serif;
+    display:flex;
+    padding:2%;
+    align-content: center;
+    border-bottom: 1px solid #fff;
+} 
+
+.order_list:hover{
+    display:flex;
+    background-color: #f5f5f5;
+    padding:2%;
+    align-content: center;
+    border-bottom: 1px solid #fff;
+} 
+
+.review{
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review a{
+    font-size:18px;
+    color:#000;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.container{
+    margin-bottom: 2%;
+}
+
+textarea{
+    width:100%;
+}
+
+.spanproduct{
+    font-size: 10px;
+    color: #555;
+    width: 100%;
+}
+
+.smallglimpse{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+
+.smallglimpse::-webkit-scrollbar {
+    display: none;
+}
+
+.orderpicture{
+    width:70px;
+}
+
+.smallglimpse img{
+    width:27px;
+}
+
+@media(max-width:360px){
+    .heading_top {
+        font-family: 'Jost', sans-serif;
+        padding-top: 5%;
+        width: 100%;
+        margin-bottom:0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 0;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 1%;
+    }
+    .container {
+        margin:5%;
+        width: 70%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #eee;
+        padding:3%;
+        margin-left: 0;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .product_thumbnail img {
+        box-shadow: 0 2px 5px #bbb;
+        width: 100%;
+    }
+
+
+    .arrowmark {
+        display: flex;
+        flex-direction: row;
+        padding-left: 0;
+        align-self: center;
+    }
+}

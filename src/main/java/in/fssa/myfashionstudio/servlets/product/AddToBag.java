@@ -11,7 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import in.fssa.myfashionstudioapp.dto.ProductDTO;
+import in.fssa.myfashionstudioapp.exception.ServiceException;
+import in.fssa.myfashionstudioapp.exception.ValidationException;
 import in.fssa.myfashionstudioapp.model.Bag;
+import in.fssa.myfashionstudioapp.model.Price;
+import in.fssa.myfashionstudioapp.model.Size;
+import in.fssa.myfashionstudioapp.service.PriceService;
+import in.fssa.myfashionstudioapp.service.ProductService;
+import in.fssa.myfashionstudioapp.service.SizeService;
 
 /**
  * Servlet implementation class AddToBag
@@ -29,24 +37,72 @@ public class AddToBag extends HttpServlet {
 
 		ArrayList<Bag> bagList = new ArrayList<>();
 
+		PriceService PriceService = new PriceService();
+
+		ArrayList<Price> priceList = new ArrayList<Price>();
+
+		Price price = null;
+
+		try {
+			price = PriceService.findPriceByProductIdAndSizeId(productId, sizeId);
+
+			priceList.add(price);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.print(priceList);
+
+		// call service get the details by product id
+		ProductService productService = new ProductService();
+		ProductDTO foundProduct = null;
+		try {
+			foundProduct = productService.findProductDetailsByProductId(productId);
+		} catch (ValidationException | ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		SizeService sizeService = new SizeService();
+		Size foundSize = null;
+
+		try {
+			foundSize = sizeService.FindSizeBySizeId(sizeId);
+		} catch (ValidationException | ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Size size = new Size();
+		size.setId(sizeId);
+		size.setValue(foundSize.getValue());
+
 		Bag bag = new Bag();
+
+		// set product
 		bag.setId(productId);
-		bag.getSize().setId(sizeId);
+		bag.setImage(foundProduct.getImage());
+		bag.setName(foundProduct.getName());
+		bag.setDescription(foundProduct.getDescription());
+		bag.setPriceList(priceList);
+		bag.setSize(size);
 		bag.setQuantity(1);
 
 		// if there is already a bag list this returns bag_list
 		HttpSession httpSession = request.getSession();
-		ArrayList<Bag> sessionBagList = (ArrayList<Bag>) httpSession.getAttribute("bag_list");
 
-		System.out.println("session bag" + sessionBagList);
+		ArrayList<Bag> sessionBagList = (ArrayList<Bag>) httpSession.getAttribute("bag_list");
 
 		PrintWriter out = response.getWriter();
 		if (sessionBagList == null) {
 			bagList.add(bag);
-			httpSession.setAttribute("bag_List", bagList);
+			httpSession.setAttribute("bag_list", bagList);
 
 			System.out.println("session bag has been created ");
+
+			response.sendRedirect(request.getContextPath() + "/shopping_bag.jsp");
 		} else {
+
 			bagList = sessionBagList;
 
 			boolean exist = false;
@@ -57,29 +113,18 @@ public class AddToBag extends HttpServlet {
 					exist = true;
 					out.println("product already exist");
 					break;
-				} else {
-					bagList.add(bag);
-					httpSession.setAttribute("bag_List", bagList);
 
-					System.out.println("nsskms =====>" + request.getAttribute("bag_List"));
-
-					out.println("product added");
 				}
+			}
+
+			if (!exist) {
+				bagList.add(bag);
+				System.out.println("product added");
+
+				response.sendRedirect(request.getContextPath() + "/shopping_bag.jsp");
 
 			}
 		}
-
 	}
-
-//	/**
-//	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-//	 *      response)
-//	 */
-//	@Override
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doGet(request, response);
-//	}
 
 }

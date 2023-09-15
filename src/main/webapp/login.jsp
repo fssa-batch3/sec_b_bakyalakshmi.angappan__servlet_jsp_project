@@ -157,13 +157,13 @@ a.forgotpassword{
                     <div>
                         <label class="label_field">Email Address</label>
                         <br >
-                        <input class="input_field" type="email" id="email" required="true" name="email"
+                        <input class="input_field" type="email" id="email" required name="email"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Eg.helloMarion@gmail.com" value="marion90@gmail.com">
                     </div>
 
                     <div>
                         <label class="label_field">password</label>
-                        <input class="input_field" id="password" type="password" required="true" placeholder="Password" value="9789@623bB" name="password">
+                        <input class="input_field" id="password" type="password" required placeholder="Password" value="9789@623bB" name="password">
                     </div>
 
                     <div>

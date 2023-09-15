@@ -1,0 +1,183 @@
+body{
+    font-family: 'Jost', sans-serif;
+}
+
+p {
+    margin: 0;
+}
+
+.heading_top {
+    font-family: 'Jost', sans-serif;
+    padding-top: 3%;
+    width: 50%;
+    margin-bottom: 3%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 25%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5%;
+}
+
+div.container {
+    width: 50%;
+    height: 30%;
+    background-color: #eee;
+    padding: 0px;
+    border: 1px solid #eee;
+}
+
+.delivery_status {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.status {
+    padding: 10px 10px 10px 10px;
+    width: 90%;
+    background-color: #fff;
+    margin-bottom: 15px;
+    background-color: rgba(0, 0, 0, 0.039);
+}
+
+.status p:first-child {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.status p:last-child {
+    font-size: 12px;
+}
+
+.product_details img {
+    border: 0.5px solid #fff;
+}
+
+.product_details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 10px 20px;
+    text-align: center;
+}
+
+.names {
+    margin: 5px;
+}
+
+.names p {
+    width: 100%;
+    margin: 1px;
+    padding: 1%;
+}
+
+.brand_name , .itembrand_name {
+    font-weight: 500;
+}
+
+.delivery_address {
+    margin-top: 15px;
+    padding: 2%;
+    padding-right: 7.1%;
+    padding-left: 4.44%;
+    background-color: #fff;
+}
+
+.delivery_address h3 {
+    font-size: 22px;
+}
+
+.filladdress{
+    font-size: 14px;
+}
+
+.Total_order_price ,.Total_item_price ,.otherorders{
+    padding: 2%;
+    padding-right: 4%;
+    padding-left: 4%;
+    margin-top: 15px;
+    /* margin-bottom: 15px; */
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.total_price {
+    font-weight: 500;
+}
+
+.seller_details {
+    width: 100%;
+    padding: 2%;
+    padding-right: 4%;
+    padding-left: 4%;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+
+}
+
+.order_id {
+    width: 100%;
+    padding: 2%;
+    padding-right: 4%;
+    padding-left: 4%;
+    background-color: #fff;
+    margin-bottom: 2%;
+}
+
+.arrowmark {
+    display: flex;
+    flex-direction: row;
+    padding-left: 30%;
+    align-self: center;
+}
+
+.arrowmark i {
+    color: #000;
+    font-size: 20px;
+}
+
+.order_list {
+    font-family: 'Jost', sans-serif;
+    display: flex;
+    padding: 2%;
+    align-content: center;
+    border-bottom: 1px solid #fff;
+}
+
+.order_list:hover {
+    display: flex;
+    background-color: #f5f5f5;
+    padding: 2%;
+    align-content: center;
+    border-bottom: 1px solid #fff;
+}
+
+.details {
+    width: 70%;
+    font-size: 18px;
+}
+
+.details p {
+    padding-top: 1%;
+    margin: 0;
+}
+
+.product_thumbnail {
+    width: 25%;
+    margin-right: 2%;
+}
+
+.itemproduct_name{
+    font-size: 16px;
+}
+
+

@@ -1,0 +1,139 @@
+@import "normalize.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+}
+
+
+header {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 3px 6px 0 rgb(0 0 0 / 20%);
+}
+
+.navbar-brand img {
+    height: 70px;
+}
+
+
+.nav-item{
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+.nav-item:hover{
+    font-weight: 700;
+}
+.dropdown-menu a:hover {
+    text-transform: capitalize;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+}
+
+button {
+    padding:5%;
+    background-color: #000;
+}
+
+.searchbar {
+    font-family: 'Jost', sans-serif;
+    display: flex;
+}
+
+.searchbar input {
+    font-family: 'Jost', sans-serif;
+    width: 350px;
+    height: 40px;
+    border-right: none;
+    padding: 10px;
+    background-color: #eee;
+    border: none;
+}
+
+.searchbar .button{
+    border: none;
+    height: 100%;
+    padding: 10px;
+}
+
+.icons i {
+    font-size: 24px;
+    padding-bottom: 5%;
+}
+
+.icons a {
+    font-family: 'Jost', sans-serif;
+    margin-left: 30px;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+
+
+header#mobile-header {
+    display: none;
+}
+
+@media(max-width:360px) {
+    header#desktop-header {
+        display: none;
+    }
+
+    header#mobile-header {
+        display: flex;
+    }
+
+    body {
+        width: 100%;
+    }
+
+    header #mobile-header {
+        width: 100vw;
+    }
+
+    #mobile-header .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 10px 0 10px;
+    }
+
+    #mobile-icons a,
+    #mobile-icons i {
+        font-size: 20px;
+        padding-left: 8px;
+        margin-left: 0;
+
+    }
+
+    #mobile-header .navbar-toggler {
+        border: none;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+    }
+
+    .navbar-brand img {
+        height: 40px;
+        width: 90px;
+    }
+}

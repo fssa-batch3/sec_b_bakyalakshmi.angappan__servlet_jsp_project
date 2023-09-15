@@ -6,9 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="./assets/css/header.css">
+        <link rel="stylesheet" href="./assets/css/style.css">
+<!--         <link rel="stylesheet" href="/assets/css/footer.css"> -->
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+            crossorigin="anonymous" referrerpolicy="no-referrer">
+        
+        <link rel="stylesheet" href="./assets/css/bootstrap css/bootstrap.css">
+<!--         <link rel="stylesheet" href="/assets/css/myorder.css"> -->
+ 
+		<link rel="stylesheet" href="product_list.css">
+        <title>My Fashion Studio</title>
+        <link rel="icon" href="/assets/images/homepage-images/mobile logo.png" sizes="96Ã96" type = "image/png">
+        
 <title>product-list</title>
 
-<link rel="stylesheet" href="product_list.css">
 </head>
 <body>
 
@@ -31,7 +55,7 @@
             for (ProductDTO product : productList) {
             %>
             <a href="product?product_id=<%= product.getId() %>" style="width: 286px">
-                <div class="smallcontainer" >
+                <div class="smallcontainer">
                     <div class="images">
 						<img class="product_image" src="<%= product.getImage() %>" alt="<%= product.getName() %>" style="width: 253px; height: 316px;">
                     </div>
@@ -43,6 +67,9 @@
                     List<Price> priceList = product.getPriceList();
                     for (Price price : priceList) {
                     %>
+                    
+                    <% System.out.print(price); %>
+                   
                     <div class="prices">
                         <span class="size">size : <%= price.getSize().getValue() %></span> <span class="current_price">RS.<%= price.getPrice() %></span>
                     </div>
@@ -50,6 +77,7 @@
                     } // end priceList loop
                     %>
                 </div>
+  
             </a>
             <%
             } // end productList loop
@@ -58,5 +86,31 @@
     </main>
 
     <div class="line"></div>
+    
+    
+              <script src="./js/vendor/bootstrap.bundle.js"></script>
+              
+                    
+                 <script>
+					  // Function to handle the dropdown item selection
+					  function handleDropdownSelection(value) {
+					    // Construct the URL based on the selected value
+					    var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
+				
+					    var redirectURL = '<%= request.getContextPath()%>/products?category=' + selectedCategory;
+					
+					    // Redirect to the constructed URL
+					    window.location.href = redirectURL;
+					  }
+					
+					  // Add an event listener for each dropdown item
+					  document.querySelectorAll('.dropdown-item').forEach(function(item) {
+					    item.addEventListener('click', function() {
+					      var selectedValue = item.getAttribute('value');
+					      handleDropdownSelection(selectedValue);
+					    });
+					  });
+				</script>
+                        
 </body>
 </html>
