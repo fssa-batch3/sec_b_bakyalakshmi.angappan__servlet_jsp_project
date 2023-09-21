@@ -9,19 +9,19 @@ p {
 .heading_top {
     font-family: 'Jost', sans-serif;
     padding-top: 3%;
-    width: 50%;
+    width: 60%;
     margin-bottom: 3%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-left: 25%;
+    margin-left: 20%;
     border-bottom: 1px solid #eee;
-    padding-bottom: 0.5%;
+/*     padding-bottom: 0.5%; */
 }
 
 div.container {
-    width: 50%;
+    width: 60%;
     height: 30%;
     background-color: #eee;
     padding: 0px;
@@ -34,24 +34,19 @@ div.container {
     justify-content: center;
     align-items: center;
 
+
 }
 
 
 .status {
-    padding: 10px 10px 10px 10px;
-    width: 90%;
+    padding: 3px 19px;
     background-color: #fff;
-    margin-bottom: 15px;
     background-color: rgba(0, 0, 0, 0.039);
-}
-
-.status p:first-child {
-    font-weight: 500;
-    font-size: 18px;
-}
-
-.status p:last-child {
-    font-size: 12px;
+    position: absolute;
+    left: 67%;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-top: 1%;
 }
 
 .product_details img {
@@ -60,15 +55,16 @@ div.container {
 
 .product_details {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
     padding: 20px 20px 10px 20px;
     text-align: center;
 }
 
+
 .names {
     margin: 5px;
+    width: 30%;
 }
 
 .names p {
@@ -125,6 +121,7 @@ div.container {
 }
 
 .order_id {
+	margin-top:2%;
     width: 100%;
     padding: 2%;
     padding-right: 4%;
@@ -151,6 +148,7 @@ div.container {
     padding: 2%;
     align-content: center;
     border-bottom: 1px solid #fff;
+/*     position:absolute; */
 }
 
 .order_list:hover {
@@ -169,6 +167,7 @@ div.container {
 .details p {
     padding-top: 1%;
     margin: 0;
+    margin-right:10px;
 }
 
 .product_thumbnail {
@@ -176,8 +175,27 @@ div.container {
     margin-right: 2%;
 }
 
-.itemproduct_name{
+.cancel_link{
+	color:#ff0000;
+}
+
+.itemproduct_name {
+    display: -webkit-box;
+    /* width: 315px; */
     font-size: 16px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.itemproduct_sizeandqty{
+	
+	display:flex;
+	flex-direction:row;
+	
+}
+
+.cancel_link{
+	font-size:16px;
 }
 
 

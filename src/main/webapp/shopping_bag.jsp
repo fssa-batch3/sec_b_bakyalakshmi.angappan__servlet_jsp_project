@@ -1,7 +1,8 @@
+<%@page import="in.fssa.myfashionstudioapp.model.Bag"%>
+<%@page import="in.fssa.myfashionstudioapp.model.OrderItem"%>
 <%@page import="in.fssa.myfashionstudioapp.model.Size"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="in.fssa.myfashionstudioapp.model.Price"%>
-<%@page import="in.fssa.myfashionstudioapp.model.Bag"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -79,18 +80,23 @@
 				<%
 				for (Bag item : bagList) {
 				%>
+				
+				<%
+				Size size = item.getPrice().getSize();
+				%>
+
 
 				<div class="order_details">
 
 					<a
-						href="<%=request.getContextPath()%>/removefrombag?product_id=<%=item.getId()%>&size_id=<%=item.getSize().getId()%>">
+						href="<%=request.getContextPath()%>/removefrombag?product_id=<%=item.getProduct().getId()%>&size_id=<%=size.getId()%>">
 						<div class="x-mark">
 							<i class="fa-solid fa-xmark"></i>
 						</div>
 					</a>
 
 					<div class="product_thumbnail">
-						<img src="<%=item.getImage()%>" alt="<%=item.getName()%>">
+						<img src="<%=item.getProduct().getImage() %>" alt="<%=item.getProduct().getName()%>">
 					</div>
 
 					<div class="product_list">
@@ -98,23 +104,20 @@
 						<div class="product_details">
 
 							<h4 class="brand_name"></h4>
-							<p class="product_name"><%=item.getName()%></p>
+							<p class="product_name"><%=item.getProduct().getName()%></p>
 						</div>
 
 						<div>
 
 
-							<%
-							Size size = item.getSize();
-							%>
-
+			
 							<label><b>Size:</b></label> <span class="span_size"> <%=size.getValue()%>
 							</span> <label><b>Qty:</b></label>
 
 							<form action="updatequantity" method="POST">
 
 								<select class="quantity"
-									id="quantitySelect_<%=item.getId()%>_<%=item.getSize().getId()%>"
+									id="quantitySelect_<%=item.getProduct().getId() %>_<%=size.getId()%>"
 									name="quantity" value="<%=item.getQuantity()%>" required
 									onchange="this.form.submit()">
 
@@ -139,8 +142,8 @@
 								<!-- Include other form inputs as needed -->
 								<!-- For example, hidden inputs to capture product and size IDs -->
 								<input type="hidden" name="product_id"
-									value="<%=item.getId()%>"> <input type="hidden"
-									name="size_id" value="<%=item.getSize().getId()%>">
+									value="<%=item.getProduct().getId()%>"> <input type="hidden"
+									name="size_id" value="<%=size.getId()%>">
 							</form>
 
 							<%-- <select class="quantity" value="<%= item.getQuantity() %>" data-product_id="<%=item.getId() %>"data-size_id="<%=item.getId() %>" required> --%>
@@ -152,19 +155,13 @@
 							<!-- loop and get product price -->
 
 
+					
 							<%
-							List<Price> priceList = item.getPriceList();
-							%>
-
-							<%
-							for (Price price : priceList) {
+							Price price = item.getPrice();
 							%>
 
 							<span class="product_price"> Rs.<%=item.getQuantity() * price.getPrice()%></span>
 
-							<%
-							}
-							%>
 
 							<!--   <span class="original_price"><del></del></span>
         <span class="product_offer"> ( % off)</span> -->
@@ -201,20 +198,19 @@
 		double Sum = 0;
 		if (bagList1 != null) {
 
-			for (Bag bag : bagList1) {
-				List<Price> priceList = bag.getPriceList();
-
-				for (Price price : priceList) {
-			Sum += bag.getQuantity() * price.getPrice();
+			for (Bag item : bagList1) {
+		
+			Sum += item.getQuantity() * item.getPrice().getPrice();
 
 				}
 
 			}
-		}
+		
+		
 		%>
 
 		<%
-		httpSession.setAttribute("sum", Sum);
+		httpSession.setAttribute("total_price", Sum);
 		%>
 
 
@@ -247,7 +243,10 @@
 
 				<div class="placeorder">
 					<small>cash on delivery only<small>
+					
+					<form action="placeorder?delivery_address_id=1" method="post">
 							<button type="submit">place order</button>
+					</form>
 				</div>
 			</div>
 
@@ -257,8 +256,7 @@
 	</div>
 
 	<%
-	}
-
+	} 
 	else {
 	%>
 	<!-- Display a "No Products" message if the session is null or bagList is empty -->

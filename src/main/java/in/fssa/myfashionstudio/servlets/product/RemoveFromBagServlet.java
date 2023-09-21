@@ -22,8 +22,6 @@ public class RemoveFromBagServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("==========================================> remove from bag ");
-
 		int productId = Integer.parseInt(request.getParameter("product_id"));
 		int sizeId = Integer.parseInt(request.getParameter("size_id"));
 
@@ -31,7 +29,7 @@ public class RemoveFromBagServlet extends HttpServlet {
 
 		if (bagList != null) {
 			for (Bag item : bagList) {
-				if ((item.getId() == productId) & (item.getSize().getId() == sizeId)) {
+				if ((item.getProduct().getId() == productId) & (item.getPrice().getSize().getId() == sizeId)) {
 					bagList.remove(bagList.indexOf(item));
 					break;
 				}

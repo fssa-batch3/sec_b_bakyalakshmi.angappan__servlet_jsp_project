@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class UserLogOutServlet
  */
-@WebServlet("/user/logout")
+@WebServlet("/logout")
 public class UserLogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,9 +23,10 @@ public class UserLogOutServlet extends HttpServlet {
 		System.out.println("shdysty");
 
 		HttpSession session = request.getSession();
-		String attributeName = "loggedUser";
+
+		String attributeName = "userId";
 		session.removeAttribute(attributeName);
-		session.invalidate();
+		/* session.invalidate(); */
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 	}
 }

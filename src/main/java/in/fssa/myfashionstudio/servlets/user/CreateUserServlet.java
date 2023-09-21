@@ -53,12 +53,12 @@ import in.fssa.myfashionstudioapp.service.UserService;
  * }
  * 
  */
-@WebServlet("/user/signup")
+
+@WebServlet("/user/create")
 public class CreateUserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-//
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -76,34 +76,20 @@ public class CreateUserServlet extends HttpServlet {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
 		response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-		// Read the JSON data from the request's input stream
-//
-//		BufferedReader reader = request.getReader();
-//		StringBuilder jsonBody = new StringBuilder();
-//		String line;
-//		while ((line = reader.readLine()) != null) {
-//			jsonBody.append(line);
-//		}
-
-		// Parse the JSON data using Gson or any other JSON parsing library
-//		Gson gson = new Gson();
-		// User userData = gson.fromJson(jsonBody.toString(), User.class);
-
-		// System.out.println(userData);
 
 		User newUser = new User();
 
-		newUser.setUserName(request.getParameter("userName"));
+		newUser.setUserName(request.getParameter("username"));
 		System.out.println((newUser.getUserName()));
 		newUser.setEmail(request.getParameter("email"));
-		newUser.setPhoneNumber(Long.parseLong(request.getParameter("phoneNumber")));
+		newUser.setPhoneNumber(Long.parseLong(request.getParameter("mobilenumber")));
 		newUser.setPassword(request.getParameter("password"));
 
 		UserService userService = new UserService();
 
 		try {
 
-			userService.createUser(newUser);
+			int userId = userService.createUser(newUser);
 
 			ResponseEntity res = new ResponseEntity();
 			res.setStatusCode(200);
@@ -112,6 +98,10 @@ public class CreateUserServlet extends HttpServlet {
 
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
+
+			request.getSession().setAttribute("userId", userId);
+
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 
 		} catch (ValidationException | ServiceException e) {
 
@@ -123,7 +113,8 @@ public class CreateUserServlet extends HttpServlet {
 			String responseJson = gson1.toJson(res);
 			response.setStatus(500);
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(responseJson);
+
+			response.sendRedirect(request.getContextPath() + "/sign_up.jsp");
 
 			e.printStackTrace();
 		}

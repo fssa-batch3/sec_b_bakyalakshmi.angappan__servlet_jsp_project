@@ -46,7 +46,7 @@ public class UpdateQuantityServlet extends HttpServlet {
 		// Iterate through bagList and update the quantity for the matching product and
 		// size
 		for (Bag item : bagList) {
-			if ((item.getId()) == (productId) && (item.getSize().getId()) == (sizeId)) {
+			if (item.getProduct().getId() == (productId) && (item.getPrice().getSize().getId() == (sizeId))) {
 				item.setQuantity(quantity);
 				break; // Assuming there's only one matching item
 			}

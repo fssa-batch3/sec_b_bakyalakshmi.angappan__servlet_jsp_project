@@ -167,16 +167,14 @@
               
         </form>
         
-        <button class="btn btn-dark seller_btn mx-3"><i class="fa-regular fa-user"></i> SELLER </button> 
+    <!--     <button class="btn btn-dark seller_btn mx-3"><i class="fa-regular fa-user"></i> SELLER </button>  -->
 
 
         <div class="mx-1 icons">
 
-
-
-        <a href="<%= request.getContextPath() %>/user/view">
+        <a href="<%= request.getContextPath() %>/my_profile">
             <div id="profile">
-                <div><i class="fa-solid fa-user"></i></div>
+                <div> <i class="fa-solid fa-user"></i> </div>
                 <div id="account">profile</div>
             </div>
         </a>   
