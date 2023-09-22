@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@page import="in.fssa.myfashionstudioapp.model.Price"%>
+<%@page import="in.fssa.myfashionstudioapp.dto.ProductDTO"%>
+<%@page import="java.util.List"%>
 <html lang="en">
 
 <head>
@@ -16,15 +19,16 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
-	
+
 <!-- link for the image in the title  -->
 <link rel="icon" href="./assets/images/homepage-images/mobile logo.png"
-sizes="96×96" type="image/png">
+	sizes="96×96" type="image/png">
 
 <!-- link for the bootstrap css -->
 <link rel="stylesheet" href="./assets/css/bootstrap css/bootstrap.css">
 <!-- link for the common css -->
 <link rel="stylesheet" href="./assets/css/header.css">
+<link rel="stylesheet" href="./assets/css/product_list.css">
 <!-- -->
 <link rel="stylesheet" href="./assets/css/style.css">
 
@@ -39,6 +43,13 @@ sizes="96×96" type="image/png">
 
 	<jsp:include page="header.jsp" />
 
+	<%
+	List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
+	%>
+
+	<%
+	System.out.print(productList);
+	%>
 	<!-- main content -->
 	<div class="container-fluid">
 
@@ -66,47 +77,54 @@ sizes="96×96" type="image/png">
 				<div class="categories_list column-gap-5">
 
 
-					<!-- <div>
-                            <a href="./pages/products/product_list-mens-shirts.html">
-                                <img src="./assets/images/categories_images/men-shirt.jpg" alt="">
-                                <h4>shirts</h4>
-                            </a>
-                        </div>
+					<div onclick="redirectToServlet(2)">
 
-                        <div>
-                            <a href="./pages/products/product_list_womens-jeans.html">
-                                <img src="./assets/images/categories_images/women-jeans.jpg" alt="">
-                                <h4>jeans</h4>
-                            </a>
-                        </div>
+						<!-- men shirts -->
+						<img src="./assets/images/categories_images/men-shirt.jpg" alt="">
+						<h4>shirts</h4>
 
-                        <div>
-                            <a href="./pages/products/product_list-womens-tops.html">
-                                <img src="./assets/images/categories_images/women-tops.webp" alt="">
-                                <h4>tops</h4>
-                            </a>
-                        </div>
+					</div>
 
-                        <div>
-                            <a href="./pages/products/product_list-mens-trousers.html">
-                                <img src="./assets/images/categories_images/trousers.jpg" alt="">
-                                <h4>trousers</h4>
-                            </a>
-                        </div>
+					<!-- men jeans -->
+					<div onclick="redirectToServlet(3)">
+						<img src="./assets/images/categories_images/men-jeans.jpg" alt="">
+						<h4>jeans</h4>
 
-                        <div>
-                            <a href="./pages/products/product_list_womens-t-shirts.html">
-                                <img src="./assets/images/categories_images/women-tshirt.jpg" alt="">
-                                <h4>t-shirts</h4>
-                            </a>
-                        </div>
+					</div>
 
-                        <div>
-                            <a href="./pages/products/product_list_womens-palazzos.html">
-                                <img src="./assets/images/categories_images/pallazoes.jpg" alt="">
-                                <h4>pallazoes</h4>
-                            </a>
-                        </div> -->
+					<!-- men t-shirts -->
+
+					<div onclick="redirectToServlet(1)">
+						<img src="./assets/images/categories_images/tshirt.jpg" alt="">
+						<h4>t-shirts</h4>
+
+					</div>
+
+
+					<div onclick="redirectToServlet(5)">
+
+						<img src="./assets/images/categories_images/women-tshirt.jpg"
+							alt="">
+						<h4>t-shirts</h4>
+
+					</div>
+
+
+
+					<div onclick="redirectToServlet(4)">
+						<img src="./assets/images/categories_images/trousers.jpg" alt="">
+						<h4>trousers</h4>
+
+					</div>
+
+
+
+					<div onclick="redirectToServlet(8)">
+
+						<img src="./assets/images/categories_images/skirts.jpg" alt="">
+						<h4>skirts</h4>
+
+					</div>
 
 				</div>
 			</div>
@@ -114,8 +132,50 @@ sizes="96×96" type="image/png">
 
 		<section>
 			<div class="deals">
-				<h1>unmissable deals</h1>
-				<div class="deals_list coloumn-gap-4"></div>
+				<h1>latest products</h1>
+
+				<div class="categories_list">
+					<div class="products">
+
+						<%
+						for (ProductDTO product : productList) {
+						%>
+						<%-- 			<a href="product?product_id=<%=product.getId()%>"
+				style="width: 286px"> --%>
+						<div class="smallcontainer"
+							onclick="redirectToServlet(<%=product.getId()%>)">
+							<div class="images">
+								<img class="product_image" src="<%=product.getImage()%>"
+									alt="<%=product.getName()%>"
+									style="width: 253px; height: 316px;">
+							</div>
+							<div class="names">
+								<h4 class="product_name"><%=product.getName()%></h4>
+							</div>
+
+							<%
+							List<Price> priceList = product.getPriceList();
+							for (Price price : priceList) {
+							%>
+
+							<div class="prices">
+								<span class="size">size : <%=price.getSize().getValue()%></span>
+								<span class="current_price">RS.<%=price.getPrice()%></span>
+							</div>
+							<%
+							} // end priceList loop
+							%>
+						</div>
+
+						<!-- 			</a> -->
+						<%
+						} // end productList loop
+						%>
+
+					</div>
+				</div>
+
+
 			</div>
 		</section>
 
@@ -126,128 +186,60 @@ sizes="96×96" type="image/png">
 			</div>
 		</section>
 
-		<!-- fashion -->
+		<!-- features -->
 
-		<section class=" fashion">
-			<h1 class="heading">men's fashion</h1>
+		<section class="features">
 
-			<div class="container-fluid fashion_list">
-
-				<div class="banner">
-					<div class="container-fluid bannersub">
-						<div>
-
-							<a href=""> <img class="image"
-								src="./assets/images/homepage-images/banners/mens-banner.jpg"
-								alt="">
-							</a>
-						</div>
-
-						<div>
-							<h1>fashion for him</h1>
-
-							<h1>
-								min <span> 40% </span> off
-							</h1>
-
-							<h2>your one stop shop for a stylish wardrobe</h2>
-
-							<button class="gender_btn" data-gender=1>shop now</button>
-						</div>
-
-					</div>
+			<div class="features">
+				<div>
+					<i class="fa-solid fa-circle-check"></i>
+					<h2>assured quality</h2>
 				</div>
 
-				<div class="fashion_categories men column-gap-4"></div>
-		</section>
-
-		<section class=" fashion">
-
-			<h1 class="heading">women's fashion</h1>
-
-			<div class="container-fluid fashion_list">
-
-				<div class="banner">
-					<div class="container-fluid bannersub">
-						<div>
-							<a href=""> <img class="image"
-								src="./assets/images/homepage-images/banners/womens-banner2.jpg"
-								alt="">
-							</a>
-						</div>
-
-						<div>
-							<h1>fashion for her</h1>
-							<h1>
-								min <span> 60% </span>off
-							</h1>
-							<h2>fresh styles for your fresh wardrobe</h2>
-
-							<button class="gender_btn" data-gender=2>shop now</button>
-						</div>
-
-					</div>
+				<div>
+					<i class="fa-solid fa-hand-holding-heart"></i>
+					<h2>100% handpicked</h2>
 				</div>
 
-				<div class="fashion_categories women column-gap-4"></div>
+				<div>
+					<i class="fas fa-shipping-fast"></i>
+					<h2>superfast delivery</h2>
+				</div>
+			</div>
 		</section>
 
-	</div>
-
-	<!-- features -->
-
-	<section class="features">
-
-		<div class="features">
-			<div>
-				<i class="fa-solid fa-circle-check"></i>
-				<h2>assured quality</h2>
-			</div>
-
-			<div>
-				<i class="fa-solid fa-hand-holding-heart"></i>
-				<h2>100% handpicked</h2>
-			</div>
-
-			<div>
-				<i class="fas fa-shipping-fast"></i>
-				<h2>superfast delivery</h2>
-			</div>
-		</div>
-	</section>
 
 
-
-	<footer> </footer>
-
-
-	<script src="./js/vendor/bootstrap.bundle.js"></script>
+		<footer> </footer>
 
 
-	<script>
-					  // Function to handle the dropdown item selection
-					  function handleDropdownSelection(value) {
-					    // Construct the URL based on the selected value
-					    var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
-					    
-					   console.log(selectedCategory);
+		<script src="./js/vendor/bootstrap.bundle.js"></script>
+
+		<script type="text/javascript">
 		
-					    var redirectURL = '<%=request.getContextPath()%>/products?category='+ selectedCategory;
+		   function redirectToServlet(productId) {
+			   
+		        window.location.href ="product?product_id="+ productId;
+		    }
+							  // Function to handle the dropdown item selection
+			 function handleDropdownSelection(value) {
+			   // Construct the URL based on the selected value
+			   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
+			
+			   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
+			
+				// Redirect to the constructed URL
+				window.location.href = redirectURL;
+			}
 
-			// Redirect to the constructed URL
-			window.location.href = redirectURL;
-		}
-
-		// Add an event listener for each dropdown item
-		document.querySelectorAll('.dropdown-item').forEach(function(item) {
-			item.addEventListener('click', function() {
-				var selectedValue = item.getAttribute('value');
-				handleDropdownSelection(selectedValue);
-			});
-		});
-	</script>
-
-
+				// Add an event listener for each dropdown item
+				document.querySelectorAll('.dropdown-item').forEach(function(item) {
+					item.addEventListener('click', function() {
+						var selectedValue = item.getAttribute('value');
+						handleDropdownSelection(selectedValue);
+					});
+				});
+		</script>
 </body>
 
 

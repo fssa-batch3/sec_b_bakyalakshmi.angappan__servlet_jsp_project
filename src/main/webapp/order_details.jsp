@@ -8,6 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- link for the google fonts -->
@@ -21,7 +22,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
-	
+
 <!-- link for the bootstrap css -->
 <link rel="stylesheet" href="./assets/css/bootstrap css/bootstrap.css">
 <!-- link for the common css -->
@@ -29,14 +30,17 @@
 <!-- -->
 <link rel="stylesheet" href="./assets/css/order_details.css">
 <!-- script for sweet alert -->
-<script src="
+<script
+	src="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js
 "></script>
-<link href="
+<link
+	href="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
-" rel="stylesheet">
+"
+	rel="stylesheet">
+<title>product-details</title>
 
-<title>order-details</title>
 
 </head>
 <body>
@@ -47,8 +51,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	<%
 	OrderDTO order = (OrderDTO) request.getAttribute("order");
 	%>
-
-
+	
+	<% System.out.print(order); %>
 
 	<div class="heading_top">
 		<h2>Order Details</h2>
@@ -120,11 +124,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 							<%=orderItem.getPrice().getPrice()%></p>
 						
 							
-							<a class="cancel_link" href="/cancelOrderItem" > cancel item</a>
+							<a class="cancel_link" href="<%= request.getContextPath() %>/cancelorder?order_item_id=<%= firstOrderItem.getId() %>" style="<% if (firstOrderItem.isCancel()) { %>display: none;<% } else { %>display: inline-block;<% } %>">Cancel Item</a>
 					</div>
 
 
-					<span class="status"> <%= orderItem.getStatus()  %> </span>
+						<span class="status"><%= firstOrderItem.isCancel() ? "cancelled" : firstOrderItem.getStatus()  %></span>
 
 					<div class="arrowmark">
 						<i class="fa-solid fa-chevron-right"></i>
@@ -176,5 +180,40 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 
 		</div>
+		
+
+<script src="<%= request.getContextPath() %>/js/vendor/bootstrap.bundle.js"></script>
+
+<script type="text/javascript">
+
+			//Detect when the user navigates back
+			window.onpopstate = function(event) {
+			    // Reload the current page
+			    window.open(location.href, '_self');
+			};
+			
+			
+				function redirectToServlet(orderId) {
+					window.location.href = 'order_details?order_id=' + orderId;
+				}
+							  // Function to handle the dropdown item selection
+			 function handleDropdownSelection(value) {
+			   // Construct the URL based on the selected value
+			   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
+			
+			   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
+			
+				// Redirect to the constructed URL
+				window.location.href = redirectURL;
+			}
+
+				// Add an event listener for each dropdown item
+				document.querySelectorAll('.dropdown-item').forEach(function(item) {
+					item.addEventListener('click', function() {
+						var selectedValue = item.getAttribute('value');
+						handleDropdownSelection(selectedValue);
+					});
+				});
+</script>
 </body>
 </html>

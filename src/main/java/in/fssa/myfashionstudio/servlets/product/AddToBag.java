@@ -26,6 +26,7 @@ import in.fssa.myfashionstudioapp.service.SizeService;
  */
 @WebServlet("/user/bag")
 public class AddToBag extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -84,15 +85,6 @@ public class AddToBag extends HttpServlet {
 		Bag.setPrice(price);
 		Bag.setQuantity(1);
 
-//		// set product
-//		bag.setId(productId);
-//		bag.setImage(foundProduct.getImage());
-//		bag.setName(foundProduct.getName());
-//		bag.setDescription(foundProduct.getDescription());
-//		bag.setPriceList(priceList);
-//		bag.setSize(size);
-//		bag.setQuantity(1);
-
 		// if there is already a bag list this returns bag_list
 		HttpSession httpSession = request.getSession();
 
@@ -105,7 +97,7 @@ public class AddToBag extends HttpServlet {
 
 			System.out.println("session bag has been created ");
 
-			response.sendRedirect(request.getContextPath() + "/shopping_bag.jsp");
+			response.sendRedirect(request.getContextPath() + "/shoppingbag");
 		} else {
 
 			bagList = sessionBagList;
@@ -116,6 +108,8 @@ public class AddToBag extends HttpServlet {
 
 				if ((item.getProduct().getId()) == productId && (item.getPrice().getSize().getId()) == sizeId) {
 					exist = true;
+//					request.setAttribute("existInBag", exist);
+//					request.getRequestDispatcher("/product").forward(request, response);
 					out.println("product already exist");
 					break;
 
@@ -123,11 +117,10 @@ public class AddToBag extends HttpServlet {
 			}
 
 			if (!exist) {
+
 				bagList.add(Bag);
 				System.out.println("product added");
-
-				response.sendRedirect(request.getContextPath() + "/shopping_bag.jsp");
-
+				response.sendRedirect(request.getContextPath() + "/shoppingbag");
 			}
 		}
 	}

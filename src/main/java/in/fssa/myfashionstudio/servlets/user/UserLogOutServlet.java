@@ -27,6 +27,6 @@ public class UserLogOutServlet extends HttpServlet {
 		String attributeName = "userId";
 		session.removeAttribute(attributeName);
 		/* session.invalidate(); */
-		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		response.sendRedirect(request.getContextPath() + "/home");
 	}
 }

@@ -55,6 +55,8 @@ public class GetAllOrdersByUserIdServlet extends HttpServlet {
 
 			request.setAttribute("orderList", orderDTOList);
 
+			System.out.println(orderDTOList);
+
 			// check the delivery date greater than the current date
 
 			// if so call a method to update the delivered status

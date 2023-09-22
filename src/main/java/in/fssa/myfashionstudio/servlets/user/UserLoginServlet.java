@@ -35,7 +35,7 @@ public class UserLoginServlet extends HttpServlet {
 			userId = userService.logIn(email, password);
 			if (userId > 0) {
 				request.getSession().setAttribute("userId", userId);
-				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				response.sendRedirect(request.getContextPath() + "/home");
 
 			} else {
 				String errorMessage = "?error=" + "Invalid email or password";

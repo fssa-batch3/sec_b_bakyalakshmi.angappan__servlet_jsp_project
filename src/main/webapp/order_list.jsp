@@ -16,7 +16,6 @@
 
 <link rel="stylesheet" href="./assets/css/order_list.css">
 <link rel="stylesheet" href="./assets/css/order_details.css">
-<!--         <link rel="stylesheet" href="/assets/css/footer.css"> -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,48 +143,19 @@
 						rs:
 						<%=firstOrderItem.getPrice().getPrice()%></p>
 
+					<a class="cancel_link" href="<%= request.getContextPath() %>/cancelorder?order_item_id=<%= firstOrderItem.getId() %>" style="<% if (firstOrderItem.isCancel()) { %>display: none;<% } else { %>display: inline-block;<% } %>">Cancel Item</a>
 
-					<a class="cancel_link" href=""> cancel item</a>
 				</div>
 
-
-				<span class="status"> <%= firstOrderItem.getStatus() %> </span>
+				<span class="status"><%= firstOrderItem.isCancel() ? "cancelled" : firstOrderItem.getStatus()  %></span>
 
 				<div class="arrowmark">
 					<i class="fa-solid fa-chevron-right"></i>
 				</div>
-
-
-
-
 
 			</div>
 
-<%-- 			<div class="order_list">
-				<div class="product_thumbnail">
-					<img class="product_image"
-						src="<%=firstOrderItem.getProduct().getImage()%>"
-						alt="<%=firstOrderItem.getProduct().getName()%>">
-				</div>
-
-				<div class="product_details">
-					<p class="product_name">
-						<%=firstOrderItem.getProduct().getName()%>
-					</p>
-					<p class="product_size">
-						size:
-						<%=firstOrderItem.getPrice().getSize().getValue()%></p>
-
-				</div>
-
-
-
-				<div class="arrowmark">
-					<i class="fa-solid fa-chevron-right"></i>
-				</div>
-
-			</div> --%>
-		</div>
+		</div>	
 		</a>
 
 		<%
@@ -193,14 +163,40 @@
 		%>
 
 	</div>
+	
+<script src="<%= request.getContextPath() %>/js/vendor/bootstrap.bundle.js"></script>
 
-	<script>
-		function redirectToServlet(orderId) {
-			window.location.href = 'order_details?order_id=' + orderId;
-		}
-	</script>
+<script type="text/javascript">
 
+			//Detect when the user navigates back
+			window.onpopstate = function(event) {
+			    // Reload the current page
+			    window.open(location.href, '_self');
+			};
+			
+			
+				function redirectToServlet(orderId) {
+					window.location.href = 'order_details?order_id=' + orderId;
+				}
+							  // Function to handle the dropdown item selection
+			 function handleDropdownSelection(value) {
+			   // Construct the URL based on the selected value
+			   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
+			
+			   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
+			
+				// Redirect to the constructed URL
+				window.location.href = redirectURL;
+			}
 
+				// Add an event listener for each dropdown item
+				document.querySelectorAll('.dropdown-item').forEach(function(item) {
+					item.addEventListener('click', function() {
+						var selectedValue = item.getAttribute('value');
+						handleDropdownSelection(selectedValue);
+					});
+				});
+</script>
 
 </body>
 </html>

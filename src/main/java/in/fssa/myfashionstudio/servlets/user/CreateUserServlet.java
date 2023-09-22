@@ -101,7 +101,7 @@ public class CreateUserServlet extends HttpServlet {
 
 			request.getSession().setAttribute("userId", userId);
 
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			response.sendRedirect(request.getContextPath() + "/home");
 
 		} catch (ValidationException | ServiceException e) {
 

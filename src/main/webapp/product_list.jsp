@@ -100,37 +100,34 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	<div class="line"></div>
 
 
-	<script src="./js/vendor/bootstrap.bundle.js"></script>
+	<script src="<%= request.getContextPath() %>/js/vendor/bootstrap.bundle.js"></script>
 
+	<script type="text/javascript">
+		
+		   function redirectToServlet(productId) {
+			   
+		        window.location.href ="product?product_id="+ productId;
+		    }
+							  // Function to handle the dropdown item selection
+			 function handleDropdownSelection(value) {
+			   // Construct the URL based on the selected value
+			   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
+			
+			   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
+			
+				// Redirect to the constructed URL
+				window.location.href = redirectURL;
+			}
 
-	<script>
-
-    function redirectToServlet(productId) {
-    	
-    	console.log(productId);
-        window.location.href ="product?product_id="+ productId;
-    }
-
-
-					  // Function to handle the dropdown item selection
-					  function handleDropdownSelection(value) {
-					    // Construct the URL based on the selected value
-					    var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
-				
-					    var redirectURL = '<%=request.getContextPath()%>/products?category='+ selectedCategory;
-
-			// Redirect to the constructed URL
-			window.location.href = redirectURL;
-		}
-
-		// Add an event listener for each dropdown item
-		document.querySelectorAll('.dropdown-item').forEach(function(item) {
-			item.addEventListener('click', function() {
-				var selectedValue = item.getAttribute('value');
-				handleDropdownSelection(selectedValue);
-			});
-		});
-	</script>
+				// Add an event listener for each dropdown item
+				document.querySelectorAll('.dropdown-item').forEach(function(item) {
+					item.addEventListener('click', function() {
+						var selectedValue = item.getAttribute('value');
+						handleDropdownSelection(selectedValue);
+					});
+				});
+		</script>
+	
 
 </body>
 </html>

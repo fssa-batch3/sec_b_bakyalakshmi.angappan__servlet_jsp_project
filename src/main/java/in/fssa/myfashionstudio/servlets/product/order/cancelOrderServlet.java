@@ -8,22 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.fssa.myfashionstudioapp.dto.OrderDTO;
 import in.fssa.myfashionstudioapp.exception.ServiceException;
-import in.fssa.myfashionstudioapp.exception.ValidationException;
 import in.fssa.myfashionstudioapp.service.OrderService;
 
 /**
- * Servlet implementation class FindOrderByOrderIdServlet
+ * Servlet implementation class cancelOrderServlet
  */
-@WebServlet("/order_details")
-public class FindOrderByOrderIdServlet extends HttpServlet {
+@WebServlet("/cancelorder")
+public class cancelOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FindOrderByOrderIdServlet() {
+	public cancelOrderServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,33 +34,37 @@ public class FindOrderByOrderIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String orderId = request.getParameter("order_id");
+		int orderItemId = Integer.parseInt(request.getParameter("order_item_id"));
 
-		System.out.println(orderId);
+		System.out.println(orderItemId);
 
-		if (orderId != null) {
+		OrderService orderService = new OrderService();
 
-			OrderService orderService = new OrderService();
+		if (orderItemId > 0) {
 
-			OrderDTO order;
 			try {
-				order = orderService.FindOrderByOrderId(orderId);
+				orderService.cancelOrder(orderItemId, "size does not fits me");
 
-				System.out.println(order);
+				response.sendRedirect(request.getContextPath() + "/orders");
 
-				request.setAttribute("order", order);
-
-				String targetUrl = "/order_details.jsp";
-
-				request.getRequestDispatcher(targetUrl).forward(request, response);
-
-			} catch (ValidationException | ServiceException e) {
+			} catch (ServiceException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
 
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
