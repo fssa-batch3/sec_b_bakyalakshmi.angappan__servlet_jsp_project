@@ -24,9 +24,9 @@
 <!-- <link rel="stylesheet" href="./assets/css/bootstrap css/bootstrap.css"> -->
 
 <!-- link for the common css -->
-<link rel="stylesheet" href="./assets/css/header.css">
+<link rel="stylesheet" href="<%= request.getContextPath()  %>/assets/css/header.css">
 <!-- -->
-<link rel="stylesheet" href="./assets/css/signup.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/signup.css">
 
 <!-- script for sweet alert -->
 
@@ -39,6 +39,26 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 "
 	rel="stylesheet">
+	
+<style>
+	
+#custom-target {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  border-style: solid;
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.swal-wide {
+	font-size: 18px !important;
+	width: 400px !important;
+}
+
+</style>
 
 <title>sign-up</title>
 
@@ -57,11 +77,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 		<div class="container-form">
 
 			<div class="x-mark">
-				<a href="../../index.html"> <i class="fa-solid fa-xmark"></i>
+				<a href="<%= request.getContextPath() %>/home"> <i class="fa-solid fa-xmark"></i>
 				</a>
 			</div>
 
-			<form action="user/create" method="post">
+			<form action="user/create" method="post" onsubmit="return checkPasswordMatch()">
 
 				<h2>create account</h2>
 
@@ -69,28 +89,28 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 					<label class="label_field" for="user_name">User name</label> <br>
 					<input class="input_field" id="user_name" type="text"
 						placeholder="Eg.Marion ame" value="Marion" name="username"
-						autocomplete="on">
+						autocomplete="on" required>
 				</div>
 
 				<div class="form-control">
 					<label class="label_field" for="email">Email address</label> <br>
 					<input class="input_field" id="email" type="email"
 						placeholder="Eg.helloMarion@gmail.com" value="marion90@gmail.com"
-						autocomplete="on" name="email">
+						autocomplete="on" name="email" required>
 				</div>
 
 				<div class="form-control ">
 					<label class="label_field" for="mobile_number">Mobile
 						number</label> <br> <input class="input_field" id="mobile_number"
 						type="tel" placeholder="Mobile number" value="9789853625"
-						name="mobilenumber" autocomplete="on">
+						name="mobilenumber" autocomplete="on" required>
 				</div>
 
 				<div class="form-control">
 					<label class="label_field" for="password">Password</label> <br>
 					<input class="input_field" type="password" id="password"
 						placeholder="password" title="" value="9789@623bB" name="password"
-						autocomplete="new-password"> <i id="togglePassword" 
+						autocomplete="new-password" required> <i id="togglePassword" 
 						class="fa-solid fa-eye" onclick="togglePasswordVisibility('password')"></i>
 				</div>
 
@@ -100,9 +120,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 						
 						<input class="input_field" type="password"
 						id="re_enter_password" placeholder="password" title=""
-						value="9789@623bB"  autocomplete="new-password" oninput="checkPasswordMatch()">
-					<p class="error-message" id="password-mismatch-error"
-						style="display: none;">Password do not match!</p>
+						value="9789@623bB"  autocomplete="new-password" required oninput="checkPasswordMatch()">
+					  <p class="error_message" id="password-mismatch-error" style="display: none;"> <i class="fa fa-circle-info"></i> Password do not match!</p>
 				</div>
 
 				<div class="buttons">
@@ -113,7 +132,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 					<%
 					if (data != null) {
 					%>
-					<p id="error_msg"><%=data%></p>
+					<p id="error_msg"> <i class="fa fa-circle-info"></i>   <%=data%></p>
 					<%
 					}
 					%>
@@ -135,6 +154,30 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 	<script>
 	
+	
+	// Detect when the user navigates back
+    window.onpopstate = function(event) {
+        // Reload the current page
+        window.open(location.href, '_self');
+    };
+    
+	
+
+	 <% if (request.getParameter("errorMessage") != null) { %>
+
+            var errorMessage = '<%= request.getParameter("errorMessage") %>';
+            
+            if (errorMessage) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage
+                });
+            }
+
+	<% } %>
+	
+
     function togglePasswordVisibility(inputId) {
         var passwordInput = document.getElementById(inputId);
         var toggleButton = document.getElementById("togglePassword");
@@ -150,17 +193,21 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
         }
     }
     
-		function checkPasswordMatch() {
-			var passwordField = document.getElementById("password");
-			var reEnterPasswordField = document
-					.getElementById("re_enter_password");
-			var errorElement = document
-					.getElementById("password-mismatch-error");
+    function checkPasswordMatch() {
+    	const flag = false;
+        const password = document.getElementById("password").value;
+        const reEnterPassword = document.getElementById("re_enter_password").value;
+        const errorElement = document.getElementById("password-mismatch-error");
 
-			if (passwordField.value !== reEnterPasswordField.value) {
-					errorElement.style.display = "block";
-			}
-		}
+        if (password === reEnterPassword) {
+            errorElement.style.display = "none";
+            flag = true;
+        } else {
+            errorElement.style.display = "block";
+        }
+        
+        return flag;
+    }
 	</script>
 
 

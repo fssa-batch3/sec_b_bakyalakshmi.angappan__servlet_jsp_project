@@ -18,6 +18,8 @@ div.location {
 .smallcontainer .heading_top {
     font-family: 'Jost', sans-serif;
     margin-bottom: 5%;
+  	margin-top: 20px;
+
 }
 
 .heading_top h3,
@@ -26,6 +28,7 @@ div.location {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 0;
+
 }
 
 .heading_top h1 {
@@ -33,9 +36,11 @@ div.location {
     font-weight: 600;
     margin-bottom: 2%;
     font-size: 28px;
+    margin-top: 1%;
 }
 
 .heading_top h3 {
+	margin-top:2%;
     font-weight: 400;
     color: #5a5a5a;
     font-size: 20px;
@@ -133,7 +138,6 @@ div.images:hover > .wishlist {
     font-weight: 400;
     text-transform: capitalize;
     margin: 0;
-    padding-bottom: 1%;
 }
 
 .smallcontainer i {
@@ -196,6 +200,15 @@ div.ratings div.buyers_count {
     border-left: 1px solid #bbb;
     height: 1.5rem;
 }
+
+.size{
+	background-color: #eee;
+	border-radius: 8px;
+	padding: 0px 1%;
+	margin-right:12px;
+}
+
+
 
 /* wishlist */
 

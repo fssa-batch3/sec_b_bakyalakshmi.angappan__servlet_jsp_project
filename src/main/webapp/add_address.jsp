@@ -77,7 +77,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
             
                             <div class="coloumn">
                                 <label class="label_field" for="pincode">pincode</label>
-                                <input class="input_field" type="text" name="pincode" id="pincode" value="600096" required>
+                                <input class="input_field" type="text" name="pincode" id="pincode" value="600096" pattern="^([^0][0-9]){6}$"  maxlength="6" title="pincode must be valid cannot deliver to this pincode" required>
                             </div>
                         </div>
             

@@ -297,6 +297,21 @@ span.date {
 	
 }
 
+.add.btn {
+    margin-top: 18px;
+    border: 1px solid #555;
+    /* background-color: #555; */
+}
+
+.add.btn:hover {
+    margin-top: 18px;
+    border: 1px solid #555;
+    color:#000;
+    font-weight:400;
+    /* background-color: #555; */
+}
+
+
 .no-products-message i {
 	font-size: 100px;
 	margin-bottom: 20px; 

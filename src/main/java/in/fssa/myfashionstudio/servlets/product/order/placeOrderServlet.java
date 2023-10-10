@@ -43,12 +43,23 @@ public class placeOrderServlet extends HttpServlet {
 
 		double totalPrice = (double) session.getAttribute("total_price");
 
-		int deliveryAddressId = Integer.parseInt(request.getParameter("delivery_address_id"));
+		int deliveryAddressId = 0; // Initialize to 0 by default
+
+		String deliveryAddressIdParam = request.getParameter("delivery_address_id");
+		if (deliveryAddressIdParam != null && !deliveryAddressIdParam.isEmpty()) {
+			try {
+				deliveryAddressId = Integer.parseInt(deliveryAddressIdParam);
+			} catch (NumberFormatException e) {
+
+				response.sendRedirect(request.getContextPath() + "/shoppingbag");
+			}
+		}
 
 		UserService userService = new UserService();
 		User user = null;
 
 		try {
+
 			user = userService.findById(userId);
 
 			OrderService orderService = new OrderService();

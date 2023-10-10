@@ -39,7 +39,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 "
 	rel="stylesheet">
-<title>product-details</title>
+<title>order-details</title>
 
 
 </head>
@@ -62,8 +62,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 
 		<div class="order_id">
+		<b>
 			ORDER ID #
-			<%=order.getOrderCode()%>
+			<%=order.getOrderCode()%></b>
 		</div>
 
 		<%
@@ -74,9 +75,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 		System.out.print(orderItemList);
 		%>
 
-		<%
-		OrderItem firstOrderItem = orderItemList.get(0);
-		%>
 
 
 
@@ -86,7 +84,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 			<div class="othercontainer">
 				<div class="otherorders">
-					<h5>items in this order</h5>
+					<h5>Items in this order</h5>
 				</div>
 
 				<%
@@ -124,11 +122,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 							<%=orderItem.getPrice().getPrice()%></p>
 						
 							
-							<a class="cancel_link" href="<%= request.getContextPath() %>/cancelorder?order_item_id=<%= firstOrderItem.getId() %>" style="<% if (firstOrderItem.isCancel()) { %>display: none;<% } else { %>display: inline-block;<% } %>">Cancel Item</a>
+							<a class="cancel_link" href="<%= request.getContextPath() %>/cancelorder?order_item_id=<%= orderItem.getId() %>" style="<% if (orderItem.isCancel()) { %>display: none;<% } else { %>display: inline-block;<% } %>">Cancel Item</a>
 					</div>
 
 
-						<span class="status"><%= firstOrderItem.isCancel() ? "cancelled" : firstOrderItem.getStatus()  %></span>
+						<span class="status"><%= orderItem.isCancel() ? "cancelled" : orderItem.getStatus()  %></span>
 
 					<div class="arrowmark">
 						<i class="fa-solid fa-chevron-right"></i>

@@ -22,13 +22,16 @@ img{
 .container-form{
     position:relative;
     font-family: 'Jost', sans-serif;
-    width:23%;
-    height:52%;
+    width:25%;
     padding:2%;
     background-color: white;
     border:2px solid #eee;
     border-radius: 5px;
     text-transform: capitalize;
+}
+
+.container-form form div {
+	padding-bottom:8%;
 }
 
 div.x-mark i{
@@ -41,17 +44,15 @@ div.x-mark i{
 }
 .container-form h2{
     font-weight: 500;
-    padding-top: 2%;
-    padding-bottom:6%;  
+    padding-bottom: 6%;
     text-transform: capitalize;
-    font-size: 30px;
+
 }
 
 .container-form .label_field{
     font-family: 'Jost', sans-serif;
     font-size: 20px;
     font-weight: 400;
-    padding-bottom:2%;
 }
 
 .container-form .input_field{
@@ -73,13 +74,9 @@ a.forgotpassword{
     margin-top: 1%;
 }
     
-.container_form div{
-    padding-bottom: 3%;
-}
-
 .container-form  button{
     font-family: 'Jost', sans-serif;
-    margin-top: 15%;
+    margin-top: 11%;
     font-size: 20px;
     width:100%;
     background-color:#000;
@@ -107,6 +104,10 @@ a.forgotpassword{
     font-size: 14px;
     font-weight: 600;
     color: #000;
+}
+
+#error_msg{
+	color: #e74c3c;
 }
 
 @media(max-width:360px){

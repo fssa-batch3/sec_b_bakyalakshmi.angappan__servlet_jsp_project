@@ -1,4 +1,4 @@
-package in.fssa.myfashionstudio.servlets.admin;
+package in.fssa.myfashionstudio.servlets.product;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import in.fssa.myfashionstudioapp.dto.ProductDTO;
 import in.fssa.myfashionstudioapp.exception.ServiceException;
 import in.fssa.myfashionstudioapp.exception.ValidationException;
+import in.fssa.myfashionstudioapp.model.Category;
+import in.fssa.myfashionstudioapp.service.CategoryService;
 import in.fssa.myfashionstudioapp.service.ProductService;
 
 @WebServlet("/products")
@@ -22,11 +24,18 @@ public class GetAllProductsServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		String category = request.getParameter("category");
 		System.out.println("category " + category);
 
 		ProductService productService = new ProductService();
+		CategoryService categoryService = new CategoryService();
 		try {
+			Category cateGender = null;
+			if (category != null) {
+				cateGender = categoryService.findCategoryByCategoryId(Integer.parseInt(category));
+			}
+
 			List<ProductDTO> productList;
 			if (category != null) {
 				int categoryId = Integer.parseInt(request.getParameter("category"));
@@ -44,6 +53,8 @@ public class GetAllProductsServlet extends HttpServlet {
 					System.out.println(product);
 				}
 			}
+			request.setAttribute("category", cateGender);
+
 			request.setAttribute("productList", productList);
 
 			request.getRequestDispatcher("/product_list.jsp").forward(request, response);

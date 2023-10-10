@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="in.fssa.myfashionstudioapp.model.Bag"%>
 <%@page import="in.fssa.myfashionstudioapp.model.Price"%>
 <%@page import="java.util.List"%>
@@ -5,7 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,11 +23,11 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer">
 
 <!-- link for the bootstrap css -->
-<link rel="stylesheet" href="./assets/css/bootstrap css/bootstrap.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/bootstrap css/bootstrap.css">
 <!-- link for the common css -->
-<link rel="stylesheet" href="./assets/css/header.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/header.css">
 <!-- -->
-<link rel="stylesheet" href="product_detail.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/product_detail.css">
 <!-- script for sweet alert -->
 <script
 	src="
@@ -38,13 +38,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 "
 	rel="stylesheet">
-	
-	<style>
-	.swal-wide{
-		font-size:18px !important;
-	    width:400px !important;
-	}
-	</style>
+
+<style>
+.swal-wide {
+	font-size: 18px !important;
+	width: 400px !important;
+}
+</style>
 <title>product-details</title>
 
 
@@ -57,6 +57,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	<%
 	ProductDTO product = (ProductDTO) request.getAttribute("product");
 	%>
+<%-- 
+<% System.out.print("exist in product details" + (int)request.getAttribute("existInBag")) ;%> --%>
+
+
 
 	<div class="content">
 		<div class="sizecontainer">
@@ -104,9 +108,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 
 			<div class="buttons">
-			<!-- 	<button class="buynow" id="buynow">BUY NOW</button> -->
-			
-			
+				<!-- 	<button class="buynow" id="buynow">BUY NOW</button> -->
+
+
 				<button class="buynow" id="bag">add to bag</button>
 			</div>
 			<div class="product_details">
@@ -132,14 +136,18 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 	<!-- first size should be selected first -->
 	<script>
+	
+    /* header script */
     
-    
-
-	   function redirectToServlet(productId) {
-		   
-	        window.location.href ="product?product_id="+ productId;
-	    }
-						  // Function to handle the dropdown item selection
+   		// Add an event listener for each dropdown item
+		document.querySelectorAll('.dropdown-item').forEach(function(item) {
+			item.addEventListener('click', function() {
+				var selectedValue = item.getAttribute('value');
+				handleDropdownSelection(selectedValue);
+			});
+		});
+	
+		// Function to handle the dropdown item selection
 		 function handleDropdownSelection(value) {
 		   // Construct the URL based on the selected value
 		   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
@@ -148,31 +156,25 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 		
 			// Redirect to the constructed URL
 			window.location.href = redirectURL;
+			
 		}
-
-			// Add an event listener for each dropdown item
-			document.querySelectorAll('.dropdown-item').forEach(function(item) {
-				item.addEventListener('click', function() {
-					var selectedValue = item.getAttribute('value');
-					handleDropdownSelection(selectedValue);
-				});
-			});
-	
+		
+		
 
     document.addEventListener("DOMContentLoaded", function() {
-    	
-    	
+        	
+ 
+    	// selecting all the size radio 
         var sizeRadios = document.querySelectorAll("input[name='rad']");
         sizeRadios[0].checked = true;
-        // append price 
+        
+     	// select the input to append price  
         var selectedPrice = document.getElementById("selectedPrice");
         
-        console.log(selectedPrice);
-        
+       	// Add an event listener on change for each size radios 
         sizeRadios.forEach(function(radio) {
             radio.addEventListener("change", function() {
                 var selectedSize = radio.value;
-                
                 var sizeId = selectedSize
                 var price = getPriceForSize(selectedSize);
                 selectedPrice.textContent =  " RS." + price.toFixed(2); // Display price with 2 decimal places
@@ -198,84 +200,122 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
         function getPriceForSize(size) {
             return priceData[size] ; // Default to 0 if size is not found
         }
+        
+        // Function to check if existInBag parameter is present in the URL
+        function checkExistInBagParameter() {
+       	 
+       	 
+            const url = new URL(window.location.href);
+            const existInBag = url.searchParams.get("existInBag");
+            
+            if (existInBag === "1") {
+            	
+                Swal.fire({
+              	  icon: 'warning',
+              	  text: 'product aldready exist in bag!',
+      			showConfirmButton: false,
+      			customClass: 'swal-wide',
+      			timer: 2000
+              	})
+                
+                // Remove the existInBag parameter from the URL
+                url.searchParams.delete("existInBag");
+
+                // Delay for 2 seconds (2000 milliseconds) before redirection
+                setTimeout(function() {
+                    // Redirect to the updated URL without existInBag parameter
+                    window.location.href = url.toString();
+                }, 2000);
+            }
+        }
+
+        // Check for existInBag parameter on page load
+        checkExistInBagParameter();
+
+        
     });
     
     
-    var sizeRadios = document.querySelectorAll("input[name='rad']");
 
-    var product_id = "<%=product.getId()%>"; // Get product ID initially
+
+
+    
+    // on clicking the add to bag button
 
     document.getElementById("bag").addEventListener("click", function() {
     	
-    	var product_id = "<%= product.getId( )%>";
     	
-        var selectedSize = getSelectedSize();
+/*         var selectedSize = getSelectedSize(); */
         
-        <%
-        HttpSession httpSession = request.getSession(false);
-        %>
+        <%HttpSession httpSession = request.getSession(false);%>
         
-        <%
-        if (httpSession != null && httpSession.getAttribute("userId") == null) {
-        %>
+        <%if (httpSession != null && httpSession.getAttribute("userId") == null) {%>
+        
+        // if the user is not logged in alert
         
         Swal.fire({
         	  icon: 'warning',
         	  title: 'Oops...',
         	  text: 'login to add the bag!',
-			customClass: 'swal-wide',
+			  customClass: 'swal-wide',
 			showConfirmButton: false,
 			timer: 1000
         	})
 
-        <%
-        } else{
-        %>
-       
-        if (selectedSize !== null) {
-       
-            
-          <% List<Bag> bagList = (List<Bag>)request.getAttribute("bag_list"); %>
-          <%  System.out.print("=======================================================>"+bagList); %>
+        <%} else { %>
 
-        	boolean exist = false;
-
-        	for (Bag item : <%=bagList%>) {
-
-        		if ((item.getProduct().getId()) == product_id && (item.getPrice().getSize().getId()) == selectedSize) {
-
-        			exist = true;
-        			break;
-        		}
-        	}
-        	
-        	if(!exist){
-        	    var size_id = selectedSize;
-                var redirectURL = "user/bag?product_id=" + product_id + "&size_id=" + size_id;
-                window.location.href = redirectURL;
-        	}else{
-        		alert("sdbshgdv");
-        	}	
-
-        } 
-        <%}%>
-        
-
-        
-        
-
+   
+    	// selecting all the size radio 
+        var sizeRadios = document.querySelectorAll("input[name='rad']");
     	
-     
+    	var sizeId = getSelectedSize();
+    	
+        function getSelectedSize() {
+            for (var i = 0; i < sizeRadios.length; i++) {
+                if (sizeRadios[i].checked) {
+                	
+                	console.log()
+                	return sizeRadios[i].value;
+                }
+            }
+            return null; // Return null if no size is selected
+        }
+ 		
+ 		var productId = <%=product.getId()%>;
+ 		 
+        // if the user logged in add to bag
+
+         if (productId != null && sizeId !== null) {
+
+        	 const Toast = Swal.mixin({
+        		  toast: true,
+        		  position: 'top-end',
+        		  showConfirmButton: false,
+        		  timer: 500,
+        		  timerProgressBar: true,
+        		  didOpen: (toast) => {
+        		    toast.addEventListener('mouseenter', Swal.stopTimer)
+        		    toast.addEventListener('mouseleave', Swal.resumeTimer)
+        		  }
+        		})
+
+        		Toast.fire({
+        		  icon: 'success',
+        		  title: 'product added to bag'
+        		})
+
+	     var redirectURL = "user/bag?product_id=" + productId + "&size_id=" + sizeId; 
+	     
+	      window.location.href = redirectURL;
+	         
+	     	 }  
+	     	   
+        
+        <% } %> 
+               
     });
 
-    function getSelectedSize() {
-        for (var i = 0; i < sizeRadios.length; i++) {
-            if (sizeRadios[i].checked) {
-                return sizeRadios[i].value;
-            }
-        }
-        return null; // Return null if no size is selected
-    }
+    
     
  
 

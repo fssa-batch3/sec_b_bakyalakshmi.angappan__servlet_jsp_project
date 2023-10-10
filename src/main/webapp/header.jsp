@@ -12,14 +12,14 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 <header id="desktop-header">
 	<nav class="navbar navbar-expand-lg">
 
-		<div class="container-fluid d-flex justify-content-evenly">
+		<div class="container-fluid d-flex justify-content-evenly" style="width:90%;">
 			<a class="mx-1 navbar-brand" href="<%=request.getContextPath()%>/home"> <img
 				src="<%=request.getContextPath()%>/assets/images/homepage-images/logo.png"
 				alt="my fashion studio logo" />
 			</a>
 
 			<div
-				class="me-5 collapse d-flex justify-content-evenly flex-basis-35% navbar-collapse"
+				class="collapse d-flex justify-content-evenly navbar-collapse"
 				id="navbarSupportedContent">
 
 
@@ -75,10 +75,10 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 
 			</form>
 
-			<button class="btn btn-dark seller_btn mx-3">
+<!-- 			<button class="btn btn-dark seller_btn mx-3">
 				<i class="fa-regular fa-user"></i> SELLER
 			</button>
-
+ -->
 			<div class="mx-1 icons">
 				<a href="<%=request.getContextPath()%>/login">
 					<div id="profile">
@@ -114,14 +114,14 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 <header id="desktop-header">
 	<nav class="navbar navbar-expand-lg">
 
-		<div class="container-fluid d-flex">
+		<div class="container-fluid d-flex justify-content-evenly" style="width:90%;">
 
 			<a class="mx-1 navbar-brand" href="<%=request.getContextPath()%>/home"> <img
-				src="./assets/images/homepage-images/logo.png"
+				src="<%= request.getContextPath()%>/assets/images/homepage-images/logo.png"
 				alt="my fashion studio logo" />
 			</a>
 
-		<div class="me-5 collapse d-flex justify-content-evenly flex-basis-35% navbar-collapse">
+		<div class="collapse d-flex justify-content-evenly navbar-collapse">
 
 				<ul class="navbar-nav mb-1 mb-lg-0 mx-auto">
 

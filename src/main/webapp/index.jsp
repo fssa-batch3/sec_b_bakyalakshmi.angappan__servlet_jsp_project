@@ -34,15 +34,12 @@
 
 <title>My Fashion Studio</title>
 
-
-
-
 </head>
 
 <body>
 
 	<jsp:include page="header.jsp" />
-
+<%-- 
 	<%
 	List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
 	%>
@@ -50,6 +47,7 @@
 	<%
 	System.out.print(productList);
 	%>
+
 	<!-- main content -->
 	<div class="container-fluid">
 
@@ -77,7 +75,7 @@
 				<div class="categories_list column-gap-5">
 
 
-					<div onclick="redirectToServlet(2)">
+					<div onclick="redirectToProductsServlet(2)">
 
 						<!-- men shirts -->
 						<img src="./assets/images/categories_images/men-shirt.jpg" alt="">
@@ -86,7 +84,7 @@
 					</div>
 
 					<!-- men jeans -->
-					<div onclick="redirectToServlet(3)">
+					<div onclick="redirectToProductsServlet(3)">
 						<img src="./assets/images/categories_images/men-jeans.jpg" alt="">
 						<h4>jeans</h4>
 
@@ -94,14 +92,14 @@
 
 					<!-- men t-shirts -->
 
-					<div onclick="redirectToServlet(1)">
+					<div onclick="redirectToProductsServlet(1)">
 						<img src="./assets/images/categories_images/tshirt.jpg" alt="">
 						<h4>t-shirts</h4>
 
 					</div>
 
 
-					<div onclick="redirectToServlet(5)">
+					<div onclick="redirectToProductsServlet(5)">
 
 						<img src="./assets/images/categories_images/women-tshirt.jpg"
 							alt="">
@@ -111,7 +109,7 @@
 
 
 
-					<div onclick="redirectToServlet(4)">
+					<div onclick="redirectToProductsServlet(4)">
 						<img src="./assets/images/categories_images/trousers.jpg" alt="">
 						<h4>trousers</h4>
 
@@ -119,7 +117,7 @@
 
 
 
-					<div onclick="redirectToServlet(8)">
+					<div onclick="redirectToProductsServlet(8)">
 
 						<img src="./assets/images/categories_images/skirts.jpg" alt="">
 						<h4>skirts</h4>
@@ -136,12 +134,14 @@
 
 				<div class="categories_list">
 					<div class="products">
-
 						<%
+						// Set a counter to limit the loop to four iterations
+						int loopCounter = 0;
+
 						for (ProductDTO product : productList) {
+							// Limit the loop to four iterations
+							if (loopCounter < 4) {
 						%>
-						<%-- 			<a href="product?product_id=<%=product.getId()%>"
-				style="width: 286px"> --%>
 						<div class="smallcontainer"
 							onclick="redirectToServlet(<%=product.getId()%>)">
 							<div class="images">
@@ -166,13 +166,14 @@
 							} // end priceList loop
 							%>
 						</div>
-
-						<!-- 			</a> -->
 						<%
+						// Increment the loop counter
+						loopCounter++;
+						} // end if
 						} // end productList loop
 						%>
-
 					</div>
+
 				</div>
 
 
@@ -217,6 +218,12 @@
 
 		<script type="text/javascript">
 		
+		   function redirectToProductsServlet(categoryId) {
+			   
+		        window.location.href ="products?category="+ categoryId;
+		   }
+				
+		
 		   function redirectToServlet(productId) {
 			   
 		        window.location.href ="product?product_id="+ productId;
@@ -239,7 +246,7 @@
 						handleDropdownSelection(selectedValue);
 					});
 				});
-		</script>
+		</script> --%>
 </body>
 
 

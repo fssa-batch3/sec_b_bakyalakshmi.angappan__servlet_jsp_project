@@ -35,6 +35,19 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 " rel="stylesheet">
 
+<style>
+	
+.position-absolute {
+  position: absolute !important;
+}
+
+.swal-wide {
+	font-size: 18px !important;
+	width: 400px !important;
+}
+
+</style>
+
 
 <title>login</title>
 
@@ -46,6 +59,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	<div class="container">
 		<img src="https://iili.io/J9aNeat.png" alt="">
 		<div class="container-form">
+		
+		<div class="x-mark">
+				<a href="<%= request.getContextPath() %>/home"> <i class="fa-solid fa-xmark"></i>
+				</a>
+			</div>
 
 			<form action="user/login" method="get">
 
@@ -65,22 +83,30 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 						placeholder="Password" value="9789@623bB" name="password" autocomplete="new-password">
 				</div>
 
-	
-				<div>
-
-
 					<%
-					String data = (String) request.getParameter("error");
+					String data = request.getParameter("error");
 					%>
 					<%
 					if (data != null) {
 					%>
-					<p id="error_msg"><%=data%></p>
+		
+				
+				<p class="mb-0 mt-2" id="error_msg"> <i class="fa fa-circle-info"></i> <%= data %> </p>
+
+		
 					<%
 					}
 					%>
-					<button type="submit" id="login">Login</button>
-				</div>
+
+					 
+			
+	
+
+	
+
+				
+				<button type="submit" id="login">Login</button>
+				
 
 				<div>
 					<span>New to MFS?</span> <a
@@ -89,51 +115,53 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 				</div>
 
 			</form>
-
-			<%-- <% 
-HttpSession httpSession = request.getSession(false);
-int userId = -1; // Default value, change it as needed
-if (httpSession != null) {
-
-  
-        userId = (int) httpSession.getAttribute("userId");
-System.out.print(userId);
-}
-%>  --%>
-
-			<script type="text/javascript">
-   <%-- var userId = <%= userId %>; // Retrieve the user ID from the server-side code
-    
-    console.log(userId); --%>
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var loginButton = document.getElementById("login");
-
-        loginButton.addEventListener("click", function() {
-            if (userId !== -1) {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'You are logged in successfully',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    /* customStyle: {
-                        width: '400px' // Set the width here
-                    } */
-                });
-            } else {
-                // Handle the case when userId is -1 (not logged in)
-                console.log("User not logged in");
-            }
-        });
-    });
-</script>
-
-
+	
 		</div>
 	</div>
+	
+	
+	<script>
+	
+	// Detect when the user navigates back
+    window.onpopstate = function(event) {
+        // Reload the current page
+        window.open(location.href, '_self');
+    };
 
-	<!--    <script src="/js/storage.js"></script> -->
+	 var loginButton = document.getElementById("login");
+
+        loginButton.addEventListener("click", function() {
+        	
+        	<%HttpSession httpSession = request.getSession(false);%>
+        	
+        	<% System.out.print(httpSession.getAttribute("userId"));%>
+            
+            <%if (httpSession != null && httpSession.getAttribute("userId") != null  ) { %>
+            
+            const Toast = Swal.mixin({
+      		  toast: true,
+      		  position: 'top-end',
+      		  showConfirmButton: false,
+      		  timer: 500,
+      		  timerProgressBar: true,
+      		  didOpen: (toast) => {
+      		    toast.addEventListener('mouseenter', Swal.stopTimer)
+      		    toast.addEventListener('mouseleave', Swal.resumeTimer)
+      		  }
+      		})
+
+      		Toast.fire({
+      		  icon: 'success',
+      		  title: 'product added to bag'
+      		})
+                
+                
+            <%} %> 
+        }); 
+     
+     
+     </script>
+
 
 </body>
 

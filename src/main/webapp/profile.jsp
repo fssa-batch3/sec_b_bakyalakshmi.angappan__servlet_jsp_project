@@ -1,6 +1,9 @@
+<%@page import="in.fssa.myfashionstudioapp.model.Address"%>
 <%@page import="in.fssa.myfashionstudioapp.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,36 +44,66 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 </head>
 <body>
 
-<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp" />
 
 
-<% User user = (User) request.getAttribute("user"); %>
+	<%
+	User user = (User) request.getAttribute("user");
+	%>
 
 
 	<main>
 
 		<div class="header-account">
 			<div class="">
-				<h2>Your Profile</h2>
+				<h2>my Profile</h2>
 			</div>
 
 			<div>
-				<a href="<%=request.getContextPath()%>/logout" class="logout">
-				<span id="logout" onClick="logOut()">Log out</span> <i
+				<a href="<%=request.getContextPath()%>/logout" class="logout"> <span
+					id="logout" onClick="logOut()">Log out</span> <i
 					class="fa-solid fa-chevron-right"></i>
-					</a>
+				</a>
 			</div>
 		</div>
 
 		<div class="account">
 
-			<div class="addressbook">
+			<div class="addressbook sidemenulink">
 
-				<div class="heading">
+				<div class="menulinkcontainer">
+
+					<ul>
+
+
+						<li><a href="#address"> <i
+								class="fa-solid fa-location-dot sideicon"></i> my address
+						</a></li>
+
+						<li><a href="/myfashionstudioweb/shoppingbag"> <i
+								class="fa-solid fa-bag-shopping sideicon"></i> my shopping bag
+						</a></li>
+
+
+						<%
+						HttpSession httpSession = request.getSession(false);
+						%>
+						<%
+						int userId = (int) httpSession.getAttribute("userId");
+						%>
+						<li><a
+							href="<%=request.getContextPath()%>/orders?user_id=<%=userId%>">
+								<i class="fa-solid fa-box-open sideicon"></i> my orders
+						</a></li>
+					</ul>
+
+				</div>
+
+				<!-- <div class="heading">
 					<h5>Address Book</h5>
 				</div>
 
-				<!-- <i class="fa-solid fa-location-dot"></i> -->
+				<i class="fa-solid fa-location-dot"></i>
 
 				<div class="createdAddress"></div>
 
@@ -78,7 +111,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 				<div class="add btn">
 					<i class="fa-solid fa-plus"></i> ADD NEW ADDRESS
-				</div>
+				</div> -->
 
 
 			</div>
@@ -110,35 +143,21 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 							<th></th>
 						</tr>
 
-							<tr>
-								<td>User Name</td>
-								<td id="username"> <%= user.getUserName() %></td>
-							</tr>
+						<tr>
+							<td>User Name</td>
+							<td id="username"><%=user.getUserName()%></td>
+						</tr>
 
-							<tr>
-								<td>Mobile Number</td>
-								<td id="mobile_number"> <%= user.getPhoneNumber() %></td>
-							</tr>
+						<tr>
+							<td>Mobile Number</td>
+							<td id="mobile_number"><%=user.getPhoneNumber()%></td>
+						</tr>
 
-							<tr>
-								<td>Email Address</td>
-								<td id="email"><%= user.getEmail() %></td>
-							</tr>
+						<tr>
+							<td>Email Address</td>
+							<td id="email"><%=user.getEmail()%></td>
+						</tr>
 
-				<%-- 			<tr>
-								<td>Gender</td>
-								<td id="gender"><%= user %></td>
-							</tr> --%>
-
-				<!-- 			<tr>
-								<td>Date of Birth</td>
-								<td id="dateofbirth"></td>
-							</tr> -->
-
-							<!-- <tr>
-                                    <td>address</td>
-                                    <td id="address"></td>
-                                    </tr> -->
 
 						</tbody>
 					</table>
@@ -146,15 +165,57 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 						<button>EDIT</button>
 					</div>
 				</div>
+
+
+				<%
+				Address address = (Address) request.getAttribute("address");
+				%>
+
+
+
+
+
+				<div class="myadress" id="address">
+					<div class="heading">
+						<h4>Address</h4>
+					</div>
+
+					<!-- <i class="fa-solid fa-location-dot"></i> -->
+					<c:choose>
+						<c:when test="${address != null}">
+							<div class="createdAddress">${address.address}
+								<br /> landmark : ${address.landMark} <br />${address.state}
+								${address.city} ${address.pincode}
+							</div>
+						</c:when>
+						<c:otherwise>
+
+							<div class="add btn">
+								<a href="<%=request.getContextPath()%>/address/add?source=bag">
+									<i class="fa-solid fa-plus"></i> ADD NEW ADDRESS
+								</a>
+							</div>
+
+						</c:otherwise>
+					</c:choose>
+
+				</div>
+
 			</div>
 		</div>
+
+
+		<!--  adding address feature  -->
 
 		<footer> </footer>
 	</main>
 
 
 
-Logout</a>
+
+
+
+
 
 
 </body>

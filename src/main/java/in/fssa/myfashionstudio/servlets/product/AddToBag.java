@@ -3,6 +3,7 @@ package in.fssa.myfashionstudio.servlets.product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +42,7 @@ public class AddToBag extends HttpServlet {
 
 		int sizeId = Integer.parseInt(request.getParameter("size_id"));
 
-		ArrayList<Bag> bagList = new ArrayList<>();
+		List<Bag> bagList = new ArrayList<>();
 
 		PriceService PriceService = new PriceService();
 		Price price = null;
@@ -88,7 +89,7 @@ public class AddToBag extends HttpServlet {
 		// if there is already a bag list this returns bag_list
 		HttpSession httpSession = request.getSession();
 
-		ArrayList<Bag> sessionBagList = (ArrayList<Bag>) httpSession.getAttribute("bag_list");
+		List<Bag> sessionBagList = (List<Bag>) httpSession.getAttribute("bag_list");
 
 		PrintWriter out = response.getWriter();
 		if (sessionBagList == null) {
@@ -102,25 +103,31 @@ public class AddToBag extends HttpServlet {
 
 			bagList = sessionBagList;
 
-			boolean exist = false;
+			int exist = 0;
 
 			for (Bag item : bagList) {
 
 				if ((item.getProduct().getId()) == productId && (item.getPrice().getSize().getId()) == sizeId) {
-					exist = true;
-//					request.setAttribute("existInBag", exist);
-//					request.getRequestDispatcher("/product").forward(request, response);
-					out.println("product already exist");
+					exist = 1;
+
 					break;
 
 				}
 			}
 
-			if (!exist) {
-
+			if (exist == 0) {
 				bagList.add(Bag);
 				System.out.println("product added");
 				response.sendRedirect(request.getContextPath() + "/shoppingbag");
+			} else {
+				System.out.println(exist);
+
+				/*
+				 * request.setAttribute("existInBag", exist);
+				 */
+				response.sendRedirect(
+						request.getContextPath() + "/product?product_id=" + productId + "&existInBag=" + exist);
+
 			}
 		}
 	}

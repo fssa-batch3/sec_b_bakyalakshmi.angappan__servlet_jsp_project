@@ -1,3 +1,4 @@
+<%@page import="in.fssa.myfashionstudioapp.model.Category"%>
 <%@page import="in.fssa.myfashionstudioapp.model.Price"%>
 <%@page import="in.fssa.myfashionstudioapp.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
@@ -51,11 +52,15 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	<%
 	List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
 	%>
+	
+		<%
+	Category category = (Category) request.getAttribute("category");
+	%>
 
 	<main>
 		<div class="heading_top">
-			<h3 class="heading_top_gender"></h3>
-			<h1 class="heading_top_category">all products</h1>
+			<h3 class="heading_top_gender"> <%= category != null ? category.getGender().getName() : "" %></h3>
+		<h1 class="heading_top_category"><%= category != null ? category.getName() : "All Products" %></h1>
 			<small class="totalproduct"><%=productList.size()%> Items
 				Found</small>
 		</div>
@@ -82,7 +87,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 					%>
 
 					<div class="prices">
-						<span class="size">size : <%=price.getSize().getValue()%></span> <span
+						<span class="size">Size : <%=price.getSize().getValue()%></span> <span
 							class="current_price">RS.<%=price.getPrice()%></span>
 					</div>
 					<%

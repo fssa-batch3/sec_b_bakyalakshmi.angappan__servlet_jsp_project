@@ -20,7 +20,6 @@ public class SignUpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.print("inget");
 		response.sendRedirect(request.getContextPath() + "/sign_up.jsp");
 	}
 

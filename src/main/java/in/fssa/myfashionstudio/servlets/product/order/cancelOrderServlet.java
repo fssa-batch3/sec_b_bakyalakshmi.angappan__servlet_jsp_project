@@ -35,7 +35,6 @@ public class cancelOrderServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int orderItemId = Integer.parseInt(request.getParameter("order_item_id"));
-
 		System.out.println(orderItemId);
 
 		OrderService orderService = new OrderService();

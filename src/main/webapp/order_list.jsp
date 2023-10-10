@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.sql.Timestamp"%>
 <%@page import="in.fssa.myfashionstudioapp.model.OrderItem"%>
 <%@page import="in.fssa.myfashionstudioapp.dto.OrderDTO"%>
 <%@page import="java.util.List"%>
@@ -61,19 +63,27 @@
 		for (OrderDTO orderDTO : orderList) {
 		%>
 
-
-
-
 		<div class="fluid-container"
 			onclick="redirectToServlet('<%=orderDTO.getOrderCode()%>')">
 
-			<div class="product_delivery">
+			<div class="product_delivery d-flex justify-content-between">
 
 				<div class="product_order">
 					<p>
 						order Id #<%=orderDTO.getOrderCode()%></p>
+						
+			<% 
+			// Get the LocalDateTime from orderDTO and convert it to a Timestamp
+			LocalDateTime orderedDateTime = orderDTO.getOrderredAt();
+			Timestamp timestamp = Timestamp.valueOf(orderedDateTime);
+			
+			// Format the Timestamp as a date string in "dd/MM/yyyy" format
+			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd/MM/yyyy");
+			String orderDate = formatter.format(timestamp);
+			%> 
+						
 					<p>
-						ordered at #<%=orderDTO.getOrderredAt()%></p>
+						ordered at <%= orderDate %></p>
 				</div>
 
 				<%
@@ -82,6 +92,9 @@
 
 				<%
 				OrderItem firstOrderItem = OrderItemList.get(0);
+				
+				System.out.println(firstOrderItem);
+				
 				%>
 
 				<%
@@ -97,7 +110,7 @@
 
 							OrderItem orderItem = OrderItemList.get(i);
 
-							System.out.println(orderItem.getProduct().getName());
+							
 						%>
 						<img class="img1" src="<%=orderItem.getProduct().getImage()%>"
 							alt="<%=orderItem.getProduct().getName()%>">
@@ -142,12 +155,13 @@
 					<p>
 						rs:
 						<%=firstOrderItem.getPrice().getPrice()%></p>
+						
 
 					<a class="cancel_link" href="<%= request.getContextPath() %>/cancelorder?order_item_id=<%= firstOrderItem.getId() %>" style="<% if (firstOrderItem.isCancel()) { %>display: none;<% } else { %>display: inline-block;<% } %>">Cancel Item</a>
 
 				</div>
 
-				<span class="status"><%= firstOrderItem.isCancel() ? "cancelled" : firstOrderItem.getStatus()  %></span>
+				<span class="status"><%= firstOrderItem.isCancel() ? "cancelled" : firstOrderItem.getStatus() %></span>
 
 				<div class="arrowmark">
 					<i class="fa-solid fa-chevron-right"></i>

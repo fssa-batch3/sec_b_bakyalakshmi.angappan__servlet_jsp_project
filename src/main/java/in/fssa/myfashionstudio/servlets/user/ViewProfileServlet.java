@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.fssa.myfashionstudioapp.exception.ServiceException;
 import in.fssa.myfashionstudioapp.exception.ValidationException;
+import in.fssa.myfashionstudioapp.model.Address;
 import in.fssa.myfashionstudioapp.model.User;
+import in.fssa.myfashionstudioapp.service.AddressService;
 import in.fssa.myfashionstudioapp.service.UserService;
 
 /**
@@ -43,7 +45,18 @@ public class ViewProfileServlet extends HttpServlet {
 
 		if (userId > 0) {
 
+			AddressService addressService = new AddressService();
+
 			try {
+
+				Address address = addressService.findAddressByUserId(userId);
+
+				System.out.println(address);
+
+//				find address 
+
+				request.setAttribute("address", address);
+
 				user = userService.findById(userId);
 
 				request.setAttribute("user", user);

@@ -34,6 +34,7 @@ public class UserLoginServlet extends HttpServlet {
 		try {
 			userId = userService.logIn(email, password);
 			if (userId > 0) {
+
 				request.getSession().setAttribute("userId", userId);
 				response.sendRedirect(request.getContextPath() + "/home");
 

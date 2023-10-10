@@ -103,12 +103,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 								to place order !</p>
 
 						</div>
+						
+				<a href="<%= request.getContextPath() %>/address/add?source=bag">
+					<div class="add btn">
+						<i class="fa-solid fa-plus"></i> ADD NEW ADDRESS
+					</div>
+				</a>
 
-						<div class="addaddress">
-							<a href="<%= request.getContextPath() %>/address/add?source=bag">
-								<button>add address</button>
-							</a>
-						</div>
 					</div>
 				</c:otherwise>
 			</c:choose>
@@ -212,13 +213,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 							delivery in <span class="date">2 days</span>
 						</div>
 
-						<div class="buttons">
-							<div>
-								<button class="movetobag" data-bag_id="">move to
-									wishlist</button>
-							</div>
-						</div>
-
 					</div>
 
 
@@ -282,8 +276,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 				<div class="placeorder">
 					<small>cash on delivery only<small>
+					
+					
 
-							<form action="placeorder?delivery_address_id=2" method="post">
+							<form action="placeorder" method="post">
+							
+							 <input type="hidden" name="delivery_address_id" id="delivery_address_id" value="<%= address != null ? address.getId() : null %>">
 								<button type="submit">place order</button>
 							</form>
 				</div>
@@ -327,8 +325,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 			</div>
 			<!-- dynamic change address -->
 			<div class="alllocaladdress"></div>
-
-
 
 			<button class="btn add">add new address</button>
 		</div>

@@ -56,6 +56,6 @@ public class UpdateQuantityServlet extends HttpServlet {
 		session.setAttribute("bag_list", bagList);
 
 		// Redirect to a success page or send a response if needed
-		response.sendRedirect(request.getContextPath() + "/shopping_bag.jsp"); // Replace with your success page
+		response.sendRedirect(request.getContextPath() + "/shoppingbag"); // Replace with your success page
 	}
 }
