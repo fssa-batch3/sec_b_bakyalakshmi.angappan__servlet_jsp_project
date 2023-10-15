@@ -84,7 +84,7 @@ div.x-mark i {
 }
 
 .product_thumbnail img {
-	width: 10em;
+	width: 7em;
 	margin-right: 5em;
 	height: 100%
 }
@@ -143,8 +143,8 @@ span.date {
 }
 
 .side_container table tbody tr:last-child td:first-child, tr:last-child td:last-child
-	{
-	text-transform: uppercase;
+{
+	text-transform: capitalize;
 	font-weight: 600;
 }
 
@@ -311,6 +311,20 @@ span.date {
     /* background-color: #555; */
 }
 
+.edit.btn {
+    margin-top: 18px;
+    border: 1px solid #555;
+    /* background-color: #555; */
+}
+
+.edit.btn:hover {
+    margin-top: 18px;
+    border: 1px solid #555;
+    color:#000;
+    font-weight:500;
+    /* background-color: #555; */
+}
+
 
 .no-products-message i {
 	font-size: 100px;
@@ -318,6 +332,17 @@ span.date {
 	color: #FF5733;
 }
 
+@keyframes blink {
+    0%, 100% { font-size: 16.3px; }
+    50% { font-size: 16px; }
+}
+
+p.blink {
+    font-size: 16px;
+    color: red;
+    font-weight:500;
+    animation: blink 1s ease-in-out infinite;
+}
 /* @media(max-width:360px){
     .main_content {
         font-family: 'Jost', sans-serif;

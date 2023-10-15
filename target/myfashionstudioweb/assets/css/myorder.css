@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Jost', sans-serif;
+    text-transform: capitalize;
+}
+
+.myorders {
+
+    width: 60px;
+    height: 60px;
+    display: flex;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px !important;
+    background-color: #000;
+    cursor: pointer;
+    z-index: 1;
+    box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px, rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+}
+
+.myorders i {
+    color: #fff;
+    font-size: 18px;
+
+}
+
+.product_delivery {
+    font-family: 'Jost', sans-serif;
+    text-transform: capitalize;
+}

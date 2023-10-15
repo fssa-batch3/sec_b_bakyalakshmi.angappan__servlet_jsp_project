@@ -60,19 +60,20 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 						<li class="nav-item">ALL</li>
 					</a>
 
-
 				</ul>
 
 			</div>
 
-
-
-			<form class="searchbar" role="search">
-				<input class="form-control me-8 " type="search"
-					placeholder="search for products,brands and more"
+			<form class="searchbar" role="search"  action="search" method="get" onsubmit="return validateForm()">
+				<input class="form-contro rounded-0"  type="search" name="q"
+					placeholder="search for products"
 					aria-label="Search">
-
-
+				<div class="input-group-append" >
+               <span class="input-group-text rounded-0 " style="height: 40px; background-color: #eeeeee; border: 0;">
+               <i class="fa fa-search"></i>
+               
+               </span>
+            </div>
 			</form>
 
 <!-- 			<button class="btn btn-dark seller_btn mx-3">
@@ -171,16 +172,17 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 
 
 
-			<form class="searchbar" role="search">
-				<input class="form-control me-10 " type="search"
-					placeholder="search for products,brands and more"
+			<form class="searchbar" role="search"  action="search" type="post">
+				<input class="form-contro rounded-0"  type="search" name="q"
+					placeholder="search for products"
 					aria-label="Search">
-
-
+				<div class="input-group-append" >
+               <span class="input-group-text rounded-0 " style="height: 40px; background-color: #eeeeee; border: 0;">
+               <i class="fa fa-search"></i>
+               
+               </span>
+            </div>
 			</form>
-
-			<!--     <button class="btn btn-dark seller_btn mx-3"><i class="fa-regular fa-user"></i> SELLER </button>  -->
-
 
 			<div class="mx-1 icons">
 

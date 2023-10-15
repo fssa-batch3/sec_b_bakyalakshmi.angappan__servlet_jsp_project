@@ -47,21 +47,12 @@ public class CreateAddressServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("in post ===>");
 
 		HttpSession session = request.getSession();
 		int userId = 0;
 		if (session != null) {
 			userId = (int) session.getAttribute("userId");
 		}
-		System.out.println(userId);
-
-		System.out.println(request.getParameter("title"));
-		System.out.println(request.getParameter("address"));
-		System.out.println(request.getParameter("landmark"));
-		System.out.println(request.getParameter("city"));
-		System.out.println(request.getParameter("state"));
-		System.out.println(request.getParameter("country"));
 
 		String source = request.getParameter("source");
 		System.out.println(source);

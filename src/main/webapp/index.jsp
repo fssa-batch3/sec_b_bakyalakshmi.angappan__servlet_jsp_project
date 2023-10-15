@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <%@page import="in.fssa.myfashionstudioapp.model.Price"%>
 <%@page import="in.fssa.myfashionstudioapp.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,6 +32,19 @@
 <!-- -->
 <link rel="stylesheet" href="./assets/css/style.css">
 
+<!-- style for preloader  -->
+<style type="text/css">
+
+#preloader{
+	background: #000;
+	height: 100vh;
+	width:100%;
+	position:fixed;
+	z-index:100;
+}
+
+</style>
+
 <title>My Fashion Studio</title>
 
 </head>
@@ -39,7 +52,7 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-<%-- 
+
 	<%
 	List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
 	%>
@@ -47,6 +60,8 @@
 	<%
 	System.out.print(productList);
 	%>
+	
+	<div id="preloader" style="display:none;"></div> 
 
 	<!-- main content -->
 	<div class="container-fluid">
@@ -152,19 +167,15 @@
 							<div class="names">
 								<h4 class="product_name"><%=product.getName()%></h4>
 							</div>
-
-							<%
-							List<Price> priceList = product.getPriceList();
-							for (Price price : priceList) {
-							%>
-
-							<div class="prices">
-								<span class="size">size : <%=price.getSize().getValue()%></span>
-								<span class="current_price">RS.<%=price.getPrice()%></span>
-							</div>
-							<%
-							} // end priceList loop
-							%>
+						
+							<% Price price = product.getPriceList().get(0); %>
+						<div class="prices">
+					
+						
+							<span class="current_price">RS.<%= price.getCurrentPrice() %> </span><span class="mrp_price"><del>RS.<%= (int)price.getPrice() %></del></span><span
+								class="product_offer"> (<%= (int) price.getOffer() %> % off)</span>
+						</div>
+						
 						</div>
 						<%
 						// Increment the loop counter
@@ -217,7 +228,50 @@
 		<script src="./js/vendor/bootstrap.bundle.js"></script>
 
 		<script type="text/javascript">
+
+		document.onreadystatechange = () => {
+			  if (document.readyState === "loading") {
+				  var loader = document.getElementById("preloader");
+				  loader.style.display="block"; 
+				  
+				  console.log("sdnjs");
+			  }
+		};
 		
+		/* header scripts */
+		
+		  // Function to handle the dropdown item selection
+		 function handleDropdownSelection(value) {
+		   // Construct the URL based on the selected value
+		   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
+		
+		   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
+		
+			// Redirect to the constructed URL
+			window.location.href = redirectURL;
+		}
+
+			// Add an event listener for each dropdown item
+			document.querySelectorAll('.dropdown-item').forEach(function(item) {
+				item.addEventListener('click', function() {
+					var selectedValue = item.getAttribute('value');
+					handleDropdownSelection(selectedValue);
+				});
+			});
+			
+		/* search scripts */
+		
+		function validateForm() {
+        var searchInput = document.querySelector('input[name="q"]').value.trim();
+
+        if (searchInput.length === 1) {
+            return false;
+        }
+        return true;
+   		}
+        
+ 
+        
 		   function redirectToProductsServlet(categoryId) {
 			   
 		        window.location.href ="products?category="+ categoryId;
@@ -228,25 +282,8 @@
 			   
 		        window.location.href ="product?product_id="+ productId;
 		    }
-							  // Function to handle the dropdown item selection
-			 function handleDropdownSelection(value) {
-			   // Construct the URL based on the selected value
-			   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
-			
-			   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
-			
-				// Redirect to the constructed URL
-				window.location.href = redirectURL;
-			}
 
-				// Add an event listener for each dropdown item
-				document.querySelectorAll('.dropdown-item').forEach(function(item) {
-					item.addEventListener('click', function() {
-						var selectedValue = item.getAttribute('value');
-						handleDropdownSelection(selectedValue);
-					});
-				});
-		</script> --%>
+		</script> 
 </body>
 
 

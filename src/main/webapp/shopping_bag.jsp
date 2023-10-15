@@ -8,7 +8,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +57,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	if (httpSession != null) {
 		bagList = (List<Bag>) httpSession.getAttribute("bag_list");
 	}
-	
-	
 	%>
 
 
@@ -89,26 +87,37 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 				<c:when test="${address != null}">
 					<div class="address">
 						<div>
-							<p>Deliver to: </p>
-							<div class="filladdress"><%= address.getAddress() %> ,
-								<%= address.getCity() %> - <%= address.getPincode() %></div>
+							<p>Deliver to:</p>
+							<div class="filladdress"><%=address.getAddress()%>
+								,
+								<%=address.getCity()%>
+								-
+								<%=address.getPincode()%></div>
 						</div>
 						
+						
+						<a href="<%=request.getContextPath()%>/address/edit?address_id=<%= address.getId() %>&source=bag">
+							<div class="edit btn">
+								EDIT
+							</div>
+						</a>
+						
+
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="address">
 						<div>
-							<p style="font-size: 16px; color: red;">Kindly Add your delivery address
-								to place order !</p>
+							<p style="font-size: 16px; color: red;" class="blink">Kindly
+								Add your delivery address to place order !</p>
 
 						</div>
-						
-				<a href="<%= request.getContextPath() %>/address/add?source=bag">
-					<div class="add btn">
-						<i class="fa-solid fa-plus"></i> ADD NEW ADDRESS
-					</div>
-				</a>
+
+						<a href="<%=request.getContextPath()%>/address/add?source=bag">
+							<div class="add btn">
+								<i class="fa-solid fa-plus"></i> ADD NEW ADDRESS
+							</div>
+						</a>
 
 					</div>
 				</c:otherwise>
@@ -154,11 +163,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 
 							<label><b>Size:</b></label> <span class="span_size"> <%=size.getValue()%>
-							</span> <label><b>Qty:</b></label>
+							</span>
 
 							<form action="updatequantity" method="POST">
-
-								<select class="quantity"
+								<label><b>Qty:</b></label>
+								 <select class="quantity"
 									id="quantitySelect_<%=item.getProduct().getId()%>_<%=size.getId()%>"
 									name="quantity" value="<%=item.getQuantity()%>" required
 									onchange="this.form.submit()">
@@ -202,11 +211,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 							Price price = item.getPrice();
 							%>
 
-							<span class="product_price"> Rs.<%=item.getQuantity() * price.getPrice()%></span>
+							<!-- Total Price - (Total Price * (Percentage Discount / 100))  -->
 
+					
 
-							<!--   <span class="original_price"><del></del></span>
-        <span class="product_offer"> ( % off)</span> -->
+							<span class="product_price"> Rs.<%=item.getQuantity() * price.getCurrentPrice() %></span>
+
+							<span class="original_price"><del>
+									Rs.<%=item.getQuantity() * Math.round(price.getPrice()) %></del></span> <span class="product_offer"> (<%=(int) price.getOffer()%>
+								% off)
+							</span>
 						</div>
 
 						<div>
@@ -230,12 +244,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 		<%
 		ArrayList<Bag> bagList1 = (ArrayList<Bag>) session.getAttribute("bag_list");
 
-		double Sum = 0;
+		int Sum = 0;
 		if (bagList1 != null) {
 
 			for (Bag item : bagList1) {
 
-				Sum += item.getQuantity() * item.getPrice().getPrice();
+				Sum += item.getQuantity() * item.getPrice().getCurrentPrice();
 
 			}
 
@@ -267,7 +281,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 						</tr>
 
 						<tr>
-							<td>total amount</td>
+							<td>TOTAL AMOUNT</td>
 							<td>Rs.<%=Sum%></td>
 						</tr>
 
@@ -276,12 +290,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 				<div class="placeorder">
 					<small>cash on delivery only<small>
-					
-					
+
 
 							<form action="placeorder" method="post">
-							
-							 <input type="hidden" name="delivery_address_id" id="delivery_address_id" value="<%= address != null ? address.getId() : null %>">
+
+								<input type="hidden" name="delivery_address_id"
+									id="delivery_address_id"
+									value="<%=address != null ? address.getId() : null%>">
 								<button type="submit">place order</button>
 							</form>
 				</div>
@@ -332,9 +347,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	</div>
 
 
-<script src="<%= request.getContextPath() %>/js/vendor/bootstrap.bundle.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/vendor/bootstrap.bundle.js"></script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		
 		   function redirectToServlet(productId) {
 			   
@@ -346,19 +362,19 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 			   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
 			
 			   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
-			
-				// Redirect to the constructed URL
-				window.location.href = redirectURL;
-			}
 
-				// Add an event listener for each dropdown item
-				document.querySelectorAll('.dropdown-item').forEach(function(item) {
-					item.addEventListener('click', function() {
-						var selectedValue = item.getAttribute('value');
-						handleDropdownSelection(selectedValue);
-					});
-				});
-</script>
+			// Redirect to the constructed URL
+			window.location.href = redirectURL;
+		}
+
+		// Add an event listener for each dropdown item
+		document.querySelectorAll('.dropdown-item').forEach(function(item) {
+			item.addEventListener('click', function() {
+				var selectedValue = item.getAttribute('value');
+				handleDropdownSelection(selectedValue);
+			});
+		});
+	</script>
 
 
 </body>

@@ -119,7 +119,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 						<p>
 							rs:
-							<%=orderItem.getPrice().getPrice()%></p>
+							<%=orderItem.getPrice().getCurrentPrice()%></p>
 						
 							
 							<a class="cancel_link" href="<%= request.getContextPath() %>/cancelorder?order_item_id=<%= orderItem.getId() %>" style="<% if (orderItem.isCancel()) { %>display: none;<% } else { %>display: inline-block;<% } %>">Cancel Item</a>
@@ -145,7 +145,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 			%>
 
 
-			<div class="delivery_address">
+<%-- 			<div class="delivery_address">
 				<h5>Delivery Address</h5>
 
 				<div class="address">
@@ -156,7 +156,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 					<div class="filladdress">No 114, Valluvan Street, Otteri ,
 						Near School , Chennai - 600012.</div>
 				</div>
-			</div>
+			</div> --%>
 
 
 			<div>

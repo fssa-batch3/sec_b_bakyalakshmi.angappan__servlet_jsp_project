@@ -1,0 +1,259 @@
+*{
+    margin:0;
+    padding:0;
+    /* box-sizing: border-box; */
+}
+
+body{
+    font-family: 'Jost', sans-serif;
+    text-transform: capitalize;
+}
+
+.products{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 30px;
+}
+
+.smallcontainer{
+    width: 25%;
+    height:50%;
+    /*background-color:wheat;*/
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 5%;
+    position:relative;
+}
+
+div.x-mark i{
+    color:#555;
+    float:right;
+    font-size:25px;
+    position: absolute;
+    top:3%;
+    right:20%;
+}
+
+.smallcontainer a{
+    text-decoration: none;
+    color:black;
+}
+.smallcontainer img{
+    width:70%;
+    height:80%;
+    border-bottom:1px solid #eee ;
+    padding: 10px;
+}
+.smallcontainer img:hover{
+    border:1px solid #eee;
+}
+
+.brand_name{
+    margin:0;
+    /* color: #5796a0; */
+    color: #3c6d75;
+    padding-bottom: 2%;
+}
+
+.product_name{
+    font-weight: 100;
+    margin:0;
+    padding-bottom: 1%;
+}
+
+.smallcontainer i{
+    
+    color:#222;
+    padding-bottom: 2%;
+}
+
+
+.product_price{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.original_price{
+    color:#5a5a5a;
+}
+.product_offer{
+    color: #3c6d75;
+}
+.heading_top{
+    font-family: 'Jost', sans-serif;
+    margin-left:4%;
+    margin-right:3%;
+    padding:3%;
+}
+
+h2.heading_top {
+    margin-left:1%;
+    display:inline-block
+}
+
+.smallcontainer button{
+    font-family: 'Jost', sans-serif;
+    text-transform: uppercase;
+    margin-top:5%;
+    padding:3%;
+    width:70%;
+    border:none;
+    background-color: #000;
+    color:#fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.smallcontainer button:hover{
+    font-family: 'Jost', sans-serif;
+    text-transform: uppercase;
+    margin-top:5%;
+    padding:3%;
+    width:70%;
+    border:none;
+    background-color: #555;
+    color:#fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+small.totalproducts{
+    color:grey;
+    margin-left: 50px;
+}
+
+.message {
+    font-size: 28px;
+}
+
+/* .btn_wishlist{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */
+
+.buttonsofwishlist{
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 3%;
+    width: 25%;
+}
+
+
+.rem_all.btn{
+    border: 1px solid #000;
+}
+
+.rem_all.btn:hover {
+    border: 1px solid #000;
+}
+
+/* 
+select size
+*/
+
+.selectSize {
+    visibility: hidden;
+    position: fixed;
+    top: 0px;
+    width: 98vw;
+    height: 100vh;
+    background-color: #00000075;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectSize.openpopup {
+    visibility: visible;
+}
+
+.selectSize input[type=radio] {
+    accent-color: #000;
+}
+
+.selectSize input[type=radio]:disabled + label  {
+    background-color: #eee;
+}
+
+.inputSelectSize {
+    position: relative;
+    width: 30%;
+    padding: 1%;
+    z-index: 2;
+    background-color: #fff;
+}
+
+.inputSelectSize .done {
+    border: 1px solid #000;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.inputSelectSize .done:hover {
+    border: 1px solid #000;
+    width: 100%;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.inputSelectSize h5 {
+    /* padding-bottom: 2%;
+    border-bottom: 1px solid #bbb; */
+    margin-bottom: 3%;
+    display: inline-block;
+}
+
+
+.selectsizex-mark{
+    color: #555;
+    float: right;
+    font-size: 20px;
+    top: 2%;
+
+}
+
+.alllocalsize {
+    text-transform: uppercase;
+    display: flex;
+    justify-items: center;
+    margin-bottom: 5%;
+}
+
+input[type=radio] {
+    -webkit-appearance: none;
+}
+
+input[type=radio]+label {
+    background-color: #fff;
+    border: 1px solid #000;
+    width: 100px;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 3rem;
+    margin-right: 0.5em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type=radio]:checked+label {
+    background-color: #000;
+    color: #fff;
+}
+
+input[type=radio]:not:checked+label {
+    background-color: #fff;
+    color: #fff;
+}
+

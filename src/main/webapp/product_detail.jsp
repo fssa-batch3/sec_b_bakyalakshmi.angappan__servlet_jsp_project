@@ -5,7 +5,9 @@
 <%@page import="in.fssa.myfashionstudioapp.dto.ProductDTO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,16 +25,20 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer">
 
 <!-- link for the bootstrap css -->
-<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/bootstrap css/bootstrap.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap css/bootstrap.css">
 <!-- link for the common css -->
-<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/header.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/header.css">
 <!-- -->
-<link rel="stylesheet" href="<%= request.getContextPath() %>/product_detail.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/product_details.css">
 <!-- script for sweet alert -->
 <script
 	src="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js
-"></script>
+">
+</script>
 <link
 	href="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
@@ -49,6 +55,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 
 </head>
+
 <body>
 
 	<!-- Include the header.jsp file here -->
@@ -57,17 +64,25 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	<%
 	ProductDTO product = (ProductDTO) request.getAttribute("product");
 	%>
-<%-- 
+	<%-- 
 <% System.out.print("exist in product details" + (int)request.getAttribute("existInBag")) ;%> --%>
-
 
 
 	<div class="content">
 		<div class="sizecontainer">
 
-			<div class="inputsizecontainer"></div>
+
+			<div class="inputsizecontainer">
+
+
+				<h5 class="headingsizechart">
+					Size chart <i class="fa-solid fa-xmark sizeclose"></i>
+				</h5>
+
+			</div>
 
 		</div>
+
 
 		<div class="leftside">
 			<div class="product_image">
@@ -75,27 +90,32 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 					alt="Typography Printed Cotton Casual T-Shirt">
 			</div>
 		</div>
+
 		<div class="rightside">
 			<div class="names">
-				<h5 id="product_name">
-					<%=product.getName()%>
-				</h5>
+				<h3 id="brand_name"></h3>
+				<h5 id="product_name"><%=product.getName()%></h5>
 			</div>
 			<div class="prices">
-				<div class="current_price" id="selectedPrice"></div>
-			</div>
-			<p class="headingsize">Select size</p>
-			<div class="size">
 
+				<div class="current_price"></div>
+				<div class="product_offer">
+					<del id="mrp_price"></del>
+					<b id="offer"></b>
+				</div>
+			</div>
+
+			<div class="color">color : <span style="background-color: <%= product.getColor().getColorHexCode() %>; width: 12px; height: 12px; padding:0px 10px;margin-right:7px"></span> <%=product.getColor().getColorName() %> </div>
+			<p class="headingsize">Select size</p>
+		<!-- 	<p class="sizechart">sizechart</p> -->
+			<div class="size">
 				<!-- loop hear all the sizes  -->
 				<%
 				List<Price> priceList = product.getPriceList();
 				%>
-
 				<%
 				for (Price price : priceList) {
 				%>
-
 				<input class="size_no productsize"
 					id="productsize<%=price.getSize().getId()%>" type="radio"
 					name="rad" value="<%=price.getSize().getId()%>"> <label
@@ -103,31 +123,111 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 				<%
 				}
 				%>
-
 			</div>
 
+			<p class="sizealert"></p>
 
 			<div class="buttons">
-				<!-- 	<button class="buynow" id="buynow">BUY NOW</button> -->
-
-
-				<button class="buynow" id="bag">add to bag</button>
+				<button class="addtobag" id="bag">ADD TO BAG</button>
+				<!-- 				<button class="wishlist" id="wishlist">wishlisted</button> -->
 			</div>
 			<div class="product_details">
+				<h5>product information</h5>
+
+				<div class="accordion">
+					<h6>Product details</h6>
+				</div>
+				<div class="panel" style="display: block;">
+
+
+					<div class="chlidpanel">
+
+						<div class="firstchlidpanel">
+
+							<div class="components">
+								<p class="attribute-key">Pattern</p>
+								<p class="attribute-value"><%=product.getPattern()%></p>
+							</div>
+
+							<div class="components">
+								<p class="attribute-key">Fit</p>
+								<p class="attribute-value"><%=product.getFit()%></p>
+							</div>
+
+							<div class="components">
+								<p class="attribute-key">Material</p>
+								<p class="attribute-value"><%=product.getMaterial()%></p>
+							</div>
+
+							<div class="components">
+								<p class="attribute-key">Length</p>
+								<p class="attribute-value"><%=product.getLength()%></p>
+							</div>
+
+						</div>
+
+						<div class="Secondchlidpanel">
+
+							<c:if test="${not empty product.getNecklineType()}">
+
+								<div class="components">
+									<p class="attribute-key">Neckline Type</p>
+									<p class="attribute-value"><%=product.getNecklineType()%></p>
+								</div>
+
+							</c:if>
+
+							<c:if test="${not empty product.getSleeveType()}">
+
+								<div class="components">
+									<p class="attribute-key">Sleeve Type</p>
+									<p class="attribute-value"><%=product.getSleeveType()%></p>
+								</div>
+
+							</c:if>
+
+
+							<c:if test="${not empty product.getRiseType()}">
+								<div class="components">
+									<p class="attribute-key">Rise Type</p>
+									<p class="attribute-value"><%=product.getRiseType()%></p>
+								</div>
+							</c:if>
+							
+							<c:if test="${not empty product.getClosureType()}">
+
+								<div class="components">
+									<p class="attribute-key">Closure Type</p>
+									<p class="attribute-value"><%=product.getClosureType()%></p>
+								</div>
+
+							</c:if>
+
+							<div class="components">
+								<p class="attribute-key">Occasion</p>
+								<p class="attribute-value"><%=product.getOccasion()%></p>
+							</div>
+
+							<div class="components">
+								<p class="attribute-key">Care</p>
+								<p class="attribute-value"><%=product.getCare()%></p>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+
 
 				<div class="accordion">
 					<h6>Product Description</h6>
 				</div>
 				<div class="panel">
-					<p><%=product.getDescription()%>
-					</p>
+					<p><%=product.getDescription()%></p>
 				</div>
 
-
 			</div>
-
-
-
 		</div>
 	</div>
 
@@ -158,48 +258,69 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 			window.location.href = redirectURL;
 			
 		}
-		
-		
 
-    document.addEventListener("DOMContentLoaded", function() {
-        	
+	        /* size script */	
+	        
+		
+        var priceData = {
+                // Define prices for each size
+                <%for (Price price : priceList) {%>
+                
+                    "<%=price.getSize().getId()%>": {
+                    	"mrp_price":<%=(int) price.getPrice()%>,
+                    	"offer":<%=price.getOffer()%>,
+                    	"current_price":<%=price.getCurrentPrice() %>
+                    },
+                    
+                <%}%>
+            };
+
  
     	// selecting all the size radio 
         var sizeRadios = document.querySelectorAll("input[name='rad']");
+        // default price to be shown
         sizeRadios[0].checked = true;
         
-     	// select the input to append price  
-        var selectedPrice = document.getElementById("selectedPrice");
+        var selectedPrice = document.querySelector(".current_price");
+        var selectedMrpPrice =  document.querySelector("#mrp_price");
+        var selectedOffer=  document.querySelector("#offer");
         
-       	// Add an event listener on change for each size radios 
+        
+      	// Add an event listener on change for each size radios 
         sizeRadios.forEach(function(radio) {
             radio.addEventListener("change", function() {
                 var selectedSize = radio.value;
-                var sizeId = selectedSize
-                var price = getPriceForSize(selectedSize);
-                selectedPrice.textContent =  " RS." + price.toFixed(2); // Display price with 2 decimal places
+   
+                var selectedPriceData = priceData[selectedSize];
+              	var mrpPrice = selectedPriceData.mrp_price;
+                var offer = selectedPriceData.offer;
+                var cuurentPrice = selectedPriceData.current_price;
+                
+                selectedPrice.textContent =  " RS." + cuurentPrice; 
+                selectedMrpPrice.textContent = "MRP RS."+ mrpPrice;
+                selectedOffer.textContent ="("+offer+"%OFF)";
+                
             });
         });
 
-        // Define price data object (replace with your actual data)
-        var priceData = {
-            // Define prices for each size
-            <%for (Price price : priceList) {%>
-                "<%=price.getSize().getId()%>": <%=price.getPrice()%>,
-            <%}%>
-        };
-        
-        // Get the first size from the price data object
-        var firstSize = Object.keys(priceData)[0];
-        
-        // Set the default price to the first size's price
-        var defaultPrice = getPriceForSize(firstSize);
-        selectedPrice.textContent = "Price: RS." + defaultPrice.toFixed(2); // Display default price
 
-        // Function to get the price for a selected size
-        function getPriceForSize(size) {
-            return priceData[size] ; // Default to 0 if size is not found
+        
+        function getPriceData(selectedSize){
+        	return priceData[selectedSize];
+        	
         }
+        
+ 
+        var firstSize = Object.keys(priceData)[0];
+        var firstPriceData = priceData[firstSize];
+        var mrpPrice = firstPriceData.mrp_price;
+        var offer = firstPriceData.offer;
+        var currentPrice = firstPriceData.current_price;
+        
+        selectedPrice.textContent = "RS." + currentPrice; // Display default price
+        selectedMrpPrice.textContent = "MRP RS."+ mrpPrice;
+        selectedOffer.textContent ="("+offer+"%OFF)";
+
         
         // Function to check if existInBag parameter is present in the URL
         function checkExistInBagParameter() {
@@ -231,15 +352,22 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
         // Check for existInBag parameter on page load
         checkExistInBagParameter();
-
         
-    });
-    
-    
+        var acc = document.getElementsByClassName("accordion");
+        var i;
 
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        }
 
-
-    
     // on clicking the add to bag button
 
     document.getElementById("bag").addEventListener("click", function() {
@@ -262,7 +390,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 			timer: 1000
         	})
 
-        <%} else { %>
+        <%} else {%>
 
    
     	// selecting all the size radio 
@@ -311,17 +439,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	     	 }  
 	     	   
         
-        <% } %> 
+        <%}%> 
                
     });
-
     
-    
- 
 
-
-    
-  
     </script>
 </body>
 </html>

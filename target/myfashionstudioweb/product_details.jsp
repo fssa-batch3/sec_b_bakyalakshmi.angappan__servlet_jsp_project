@@ -12,12 +12,45 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
+<title>product-view</title>
+
+    <style>
+        /* Define CSS styles for your table and its elements */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
 
-<h1>Product Details</h1>
+<h1>Details of the product</h1>
 
 <% ProductDTO product = (ProductDTO)request.getAttribute("product");	%>
 

@@ -40,6 +40,19 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.all.min.js
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 " rel="stylesheet">
 
+<!-- style for preloader  -->
+<style type="text/css">
+
+#preloader{
+	background: #000;
+	height: 100vh;
+	width:100%;
+	position:fixed;
+	z-index:100;
+}
+
+</style>
+
 
 <title>product-list</title>
 
@@ -48,6 +61,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 	<!-- Include the header.jsp file here -->
 	<jsp:include page="header.jsp" />
+	
+<div id="preloader" style="display:none;"></div> 
 
 	<%
 	List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
@@ -55,12 +70,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	
 		<%
 	Category category = (Category) request.getAttribute("category");
+		
+	String categoryName = (String) request.getAttribute("categoryName");
+	String genderName = (String) request.getAttribute("genderName");
 	%>
 
 	<main>
 		<div class="heading_top">
-			<h3 class="heading_top_gender"> <%= category != null ? category.getGender().getName() : "" %></h3>
-		<h1 class="heading_top_category"><%= category != null ? category.getName() : "All Products" %></h1>
+			<h3 class="heading_top_gender"> <%= (category != null ||  genderName != null) ? ((category != null) ? category.getGender().getName():genderName) : "" %></h3>
+			<h1 class="heading_top_category" ><%= (category != null || categoryName != null) ? ((category != null) ? category.getName() : categoryName) : "" %></h1>
+ 
 			<small class="totalproduct"><%=productList.size()%> Items
 				Found</small>
 		</div>
@@ -70,37 +89,39 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 			<%
 			for (ProductDTO product : productList) {
 			%>
-<%-- 			<a href="product?product_id=<%=product.getId()%>"
-				style="width: 286px"> --%>
-				<div class="smallcontainer" onclick="redirectToServlet(<%= product.getId() %>)">
-					<div class="images">
-						<img class="product_image" src="<%=product.getImage()%>"
-							alt="<%=product.getName()%>" style="width: 253px; height: 316px;">
-					</div>
-					<div class="names">
-						<h4 class="product_name"><%=product.getName()%></h4>
-					</div>
+			
+			
+			<div class="smallcontainer" onclick="redirectToServlet(<%= product.getId() %>)">
+			<div class="images">
+				<img class="product_image" src="<%=product.getImage()%>"
+					alt="<%=product.getName()%>">
+			</div>
+			<div class="names">
+				<h4 class="product_name"><%=product.getName()%></h4>
+			</div>
+			
+				<div class="wishlist">Wishlist</div>
 
-					<%
-					List<Price> priceList = product.getPriceList();
-					for (Price price : priceList) {
-					%>
+				<% Price price = product.getPriceList().get(0); %>
+			<div class="prices">
+		
+			
+				<span class="current_price">RS.<%= price.getCurrentPrice() %> </span><span class="mrp_price"><del>RS.<%= (int)price.getPrice() %></del></span><span
+					class="product_offer"> (<%= (int) price.getOffer() %> % off)</span>
+			</div>
+		</div>
+		
 
-					<div class="prices">
-						<span class="size">Size : <%=price.getSize().getValue()%></span> <span
-							class="current_price">RS.<%=price.getPrice()%></span>
-					</div>
-					<%
-					} // end priceList loop
-					%>
-				</div>
-
-<!-- 			</a> -->
 			<%
 			} // end productList loop
 			%>
 		</div>
+
+		
+
+
 	</main>
+	
 
 	<div class="line"></div>
 
@@ -108,7 +129,31 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	<script src="<%= request.getContextPath() %>/js/vendor/bootstrap.bundle.js"></script>
 
 	<script type="text/javascript">
-		
+	
+			var loader = document.getElementById("preloader");
+			window.addEventListener("load", function(){
+				document.onreadystatechange = () => {
+					  if (document.readyState === "loading") {	  
+						  var loader = document.getElementById("preloader");
+						  loader.style.display="block"; 
+						  
+						  console.log("sdnjs");
+					  }
+					};
+		     
+			})
+			
+					document.onreadystatechange = () => {
+			  if (document.readyState === "loading") {
+		  
+				  var loader = document.getElementById("preloader");
+				  loader.style.display="block"; 
+				  
+				  console.log("sdnjs");
+			  }
+			};
+        
+	
 		   function redirectToServlet(productId) {
 			   
 		        window.location.href ="product?product_id="+ productId;

@@ -177,6 +177,7 @@ div.container {
 
 .cancel_link{
 	color:#ff0000;
+	text-decoration:underline;
 }
 
 .itemproduct_name {

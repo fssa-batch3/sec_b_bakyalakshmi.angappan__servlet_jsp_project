@@ -471,6 +471,7 @@ td{
 }
 
 
+
 @media(max-width:360px) {
     .location {
         font-size: 12px;
@@ -541,5 +542,7 @@ td{
         margin-top: 7%;
         margin-bottom: 5%;
     }
+    
+    
 
 }

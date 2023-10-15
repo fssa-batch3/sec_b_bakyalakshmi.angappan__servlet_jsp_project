@@ -73,17 +73,18 @@
 						order Id #<%=orderDTO.getOrderCode()%></p>
 						
 			<% 
-			// Get the LocalDateTime from orderDTO and convert it to a Timestamp
-			LocalDateTime orderedDateTime = orderDTO.getOrderredAt();
-			Timestamp timestamp = Timestamp.valueOf(orderedDateTime);
-			
-			// Format the Timestamp as a date string in "dd/MM/yyyy" format
-			java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd/MM/yyyy");
-			String orderDate = formatter.format(timestamp);
-			%> 
+		    // Get the LocalDateTime from orderDTO and convert it to a Timestamp
+		    LocalDateTime orderedDateTime = orderDTO.getOrderredAt();
+		    Timestamp timestamp = Timestamp.valueOf(orderedDateTime);
+		
+		    // Format the Timestamp as a date and time string in "dd/MM/yyyy HH:mm:ss" format
+		    java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+		    String orderDateAndTime = formatter.format(timestamp);
+		%> 
+
 						
 					<p>
-						ordered at <%= orderDate %></p>
+						ordered at <%= orderDateAndTime %></p>
 				</div>
 
 				<%
@@ -143,6 +144,7 @@
 
 					<div class="itemproduct_sizeandqty">
 						<p class="itemproduct_size">
+						
 							size:
 							<%=firstOrderItem.getPrice().getSize().getValue()%></p>
 
@@ -154,7 +156,7 @@
 
 					<p>
 						rs:
-						<%=firstOrderItem.getPrice().getPrice()%></p>
+						<%=firstOrderItem.getPrice().getCurrentPrice() %></p>
 						
 
 					<a class="cancel_link" href="<%= request.getContextPath() %>/cancelorder?order_item_id=<%= firstOrderItem.getId() %>" style="<% if (firstOrderItem.isCancel()) { %>display: none;<% } else { %>display: inline-block;<% } %>">Cancel Item</a>

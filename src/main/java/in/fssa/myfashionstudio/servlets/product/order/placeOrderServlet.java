@@ -40,8 +40,7 @@ public class placeOrderServlet extends HttpServlet {
 		List<Bag> bagList = (List<Bag>) session.getAttribute("bag_list");
 
 		int userId = (int) session.getAttribute("userId");
-
-		double totalPrice = (double) session.getAttribute("total_price");
+		int totalPrice = (int) session.getAttribute("total_price");
 
 		int deliveryAddressId = 0; // Initialize to 0 by default
 

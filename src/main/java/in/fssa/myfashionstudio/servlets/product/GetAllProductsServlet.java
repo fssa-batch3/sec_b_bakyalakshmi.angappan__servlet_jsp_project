@@ -25,6 +25,8 @@ public class GetAllProductsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		/* request.getRequestDispatcher("/loading.jsp").forward(request, response); */
+
 		String category = request.getParameter("category");
 		System.out.println("category " + category);
 
