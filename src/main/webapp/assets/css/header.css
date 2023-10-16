@@ -15,6 +15,7 @@ body {
 }
 
 
+
 header {
     position: sticky;
     top: 0px;
@@ -78,6 +79,8 @@ button {
 }
 
 .icons a {
+	text-transform: capitalize;
+	
     font-family: 'Jost', sans-serif;
     margin-left: 30px;
     text-decoration: none;

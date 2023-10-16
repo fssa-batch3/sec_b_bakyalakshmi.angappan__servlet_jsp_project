@@ -14,7 +14,7 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 
 		<div class="container-fluid d-flex justify-content-evenly" style="width:90%;">
 			<a class="mx-1 navbar-brand" href="<%=request.getContextPath()%>/home"> <img
-				src="<%=request.getContextPath()%>/assets/images/homepage-images/logo.png"
+				src="https://iili.io/J9aNeat.png"
 				alt="my fashion studio logo" />
 			</a>
 
@@ -118,7 +118,7 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 		<div class="container-fluid d-flex justify-content-evenly" style="width:90%;">
 
 			<a class="mx-1 navbar-brand" href="<%=request.getContextPath()%>/home"> <img
-				src="<%= request.getContextPath()%>/assets/images/homepage-images/logo.png"
+				src="https://iili.io/J9aNeat.png"
 				alt="my fashion studio logo" />
 			</a>
 

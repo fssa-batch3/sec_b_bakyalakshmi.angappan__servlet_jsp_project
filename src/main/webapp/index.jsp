@@ -76,8 +76,8 @@
 
 					<div>
 						<img class="firstimg"
-							src="./assets/images/homepage-images/banners/banner1-img.png"
-							alt="">
+							src="https://iili.io/JFR7hNf.png"
+							alt="bannerimage">
 					</div>
 				</div>
 			</div>
