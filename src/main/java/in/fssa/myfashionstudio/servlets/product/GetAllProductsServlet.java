@@ -27,6 +27,18 @@ public class GetAllProductsServlet extends HttpServlet {
 
 		/* request.getRequestDispatcher("/loading.jsp").forward(request, response); */
 
+		String a = request.getParameter("p");
+		int p = 0;
+		if (a != null) {
+			p = Integer.parseInt(request.getParameter("p"));
+		} else {
+			p = 1;
+		}
+
+		int limit = 4;
+		int startId = 1 + (p - 1) * limit;
+		int endId = limit + (p - 1) * limit;
+
 		String category = request.getParameter("category");
 		System.out.println("category " + category);
 
@@ -35,6 +47,7 @@ public class GetAllProductsServlet extends HttpServlet {
 		try {
 			Category cateGender = null;
 			if (category != null) {
+
 				cateGender = categoryService.findCategoryByCategoryId(Integer.parseInt(category));
 			}
 
@@ -42,14 +55,10 @@ public class GetAllProductsServlet extends HttpServlet {
 			if (category != null) {
 				int categoryId = Integer.parseInt(request.getParameter("category"));
 
-				productList = productService.findAllProductsByCategoryId(categoryId);
-
-				for (ProductDTO product : productList) {
-					System.out.println(product);
-				}
+				productList = productService.findAllProductsByCategoryId(categoryId, startId, endId);
 
 			} else {
-				productList = productService.getAllProducts();
+				productList = productService.getAllProducts(startId, endId);
 
 				for (ProductDTO product : productList) {
 					System.out.println(product);

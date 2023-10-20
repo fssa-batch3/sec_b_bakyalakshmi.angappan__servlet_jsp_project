@@ -245,7 +245,7 @@
 		   // Construct the URL based on the selected value
 		   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
 		
-		   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
+		   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory+ "&p=1";
 		
 			// Redirect to the constructed URL
 			window.location.href = redirectURL;

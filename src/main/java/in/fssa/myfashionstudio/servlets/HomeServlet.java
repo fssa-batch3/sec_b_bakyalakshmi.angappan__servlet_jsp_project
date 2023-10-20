@@ -41,7 +41,7 @@ public class HomeServlet extends HttpServlet {
 		List<ProductDTO> productList;
 		try {
 
-			productList = productService.getAllProducts();
+			productList = productService.getAllProducts(4, 0);
 
 			request.setAttribute("productList", productList);
 

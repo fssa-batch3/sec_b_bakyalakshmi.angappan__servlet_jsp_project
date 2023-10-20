@@ -56,7 +56,7 @@ if (httpSession != null && httpSession.getAttribute("userId") == null) {
 
 				<ul class="all_section navbar-nav mb-1 mb-lg-0 mx-auto">
 
-					<a href="<%=request.getContextPath()%>/products">
+					<a href="<%=request.getContextPath()%>/products?p=1">
 						<li class="nav-item">ALL</li>
 					</a>
 
