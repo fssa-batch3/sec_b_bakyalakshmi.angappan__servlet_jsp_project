@@ -1,7 +1,6 @@
 package in.fssa.myfashionstudio.servlets.product;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,17 +48,6 @@ public class AddToBag extends HttpServlet {
 		try {
 			price = PriceService.findPriceByProductIdAndSizeId(productId, sizeId);
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// call service get the details by product id
-		ProductService productService = new ProductService();
-		ProductDTO foundProduct = null;
-		try {
-			foundProduct = productService.findProductDetailsByProductId(productId);
-		} catch (ValidationException | ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -70,6 +58,15 @@ public class AddToBag extends HttpServlet {
 			foundSize = sizeService.FindSizeBySizeId(sizeId);
 		} catch (ValidationException | ServiceException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// call service get the details by product id
+		ProductService productService = new ProductService();
+		ProductDTO foundProduct = null;
+		try {
+			foundProduct = productService.findProductDetailsByProductId(productId);
+		} catch (ValidationException | ServiceException e) {
 			e.printStackTrace();
 		}
 
@@ -86,21 +83,17 @@ public class AddToBag extends HttpServlet {
 		Bag.setPrice(price);
 		Bag.setQuantity(1);
 
-		// if there is already a bag list this returns bag_list
+		// if there is already a bag list this returns bag_list 
 		HttpSession httpSession = request.getSession();
 
-		List<Bag> sessionBagList = (List<Bag>) httpSession.getAttribute("bag_list");
+		List<Bag> sessionBagList = (List<Bag>) httpSession.getAttribute("bag_list"); 
 
-		PrintWriter out = response.getWriter();
 		if (sessionBagList == null) {
 			bagList.add(Bag);
 			httpSession.setAttribute("bag_list", bagList);
 
-			System.out.println("session bag has been created ");
-
 			response.sendRedirect(request.getContextPath() + "/shoppingbag");
 		} else {
-
 			bagList = sessionBagList;
 
 			int exist = 0;
@@ -117,14 +110,9 @@ public class AddToBag extends HttpServlet {
 
 			if (exist == 0) {
 				bagList.add(Bag);
-				System.out.println("product added");
+
 				response.sendRedirect(request.getContextPath() + "/shoppingbag");
 			} else {
-				System.out.println(exist);
-
-				/*
-				 * request.setAttribute("existInBag", exist);
-				 */
 				response.sendRedirect(
 						request.getContextPath() + "/product?product_id=" + productId + "&existInBag=" + exist);
 

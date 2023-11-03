@@ -35,17 +35,12 @@ public class BagServlet extends HttpServlet {
 			try {
 				Address address = addressService.findAddressByUserId(userId);
 
-				System.out.println(address);
-
 //				find address 
 
 				request.setAttribute("address", address);
 				request.getRequestDispatcher("/shopping_bag.jsp").forward(request, response);
 
-//				response.sendRedirect(request.getContextPath() + "/shopping_bag.jsp");
-
 			} catch (ServiceException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

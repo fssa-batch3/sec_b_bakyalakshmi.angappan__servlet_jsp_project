@@ -94,12 +94,11 @@ span.location {
     color: #3c6d75;
 }
 
-.rightside .product_name {
-    text-transform: capitalize;
+#product_name{
+	text-transform: capitalize;
     font-size: 14px;
     letter-spacing: 1px;
 }
-
 /* prices */
 .rightside .prices div {
     margin: 0;

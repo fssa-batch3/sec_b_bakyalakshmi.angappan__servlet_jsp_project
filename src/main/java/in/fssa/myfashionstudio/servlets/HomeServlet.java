@@ -48,11 +48,10 @@ public class HomeServlet extends HttpServlet {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 
 		} catch (ValidationException | ServiceException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
-		/* request.getRequestDispatcher("/index.jsp").forward(request, response); */
 
 	}
 

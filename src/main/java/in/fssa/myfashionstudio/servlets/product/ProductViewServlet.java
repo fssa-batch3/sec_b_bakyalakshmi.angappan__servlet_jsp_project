@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import in.fssa.myfashionstudioapp.dto.ProductDTO;
 import in.fssa.myfashionstudioapp.exception.ServiceException;
@@ -25,15 +24,6 @@ public class ProductViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-
-		/*
-		 * // getting directly from session List<Bag> bagList = (List<Bag>)
-		 * session.getAttribute("bag_list");
-		 * 
-		 * System.out.println("==========================>" + bagList);
-		 */
-
 		String productId = request.getParameter("product_id");
 
 		ProductService productService = new ProductService();
@@ -41,19 +31,12 @@ public class ProductViewServlet extends HttpServlet {
 		try {
 			ProductDTO product = productService.findProductDetailsByProductId(Integer.parseInt(productId));
 
-			/* request.setAttribute("bagList", bagList); */
 			request.setAttribute("product", product);
-
-			/*
-			 * System.out.println("==================================>00000==>" +
-			 * existInBag);
-			 */
 
 			String targetUrl = "/product_detail.jsp";
 			request.getRequestDispatcher(targetUrl).forward(request, response);
 
 		} catch (ValidationException | ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -70,11 +70,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
 	<div class="content">
 		<div class="sizecontainer">
-
-
 			<div class="inputsizecontainer">
-
-
 				<h5 class="headingsizechart">
 					Size chart <i class="fa-solid fa-xmark sizeclose"></i>
 				</h5>
@@ -82,7 +78,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 			</div>
 
 		</div>
-
 
 		<div class="leftside">
 			<div class="product_image">
@@ -105,10 +100,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 				</div>
 			</div>
 
-			<div class="color">color : <span style="background-color: <%= product.getColor().getColorHexCode() %>; width: 12px; height: 12px; padding:0px 10px;margin-right:7px"></span> <%=product.getColor().getColorName() %> </div>
+			<div class="color">
+				color : <span
+					style="background-color: <%= product.getColor().getColorHexCode()%>; width: 12px; height: 12px; padding:0px 10px;margin-right:7px"></span>
+				<%=product.getColor().getColorName()%>
+			</div>
 			<p class="headingsize">Select size</p>
-		<!-- 	<p class="sizechart">sizechart</p> -->
 			<div class="size">
+			
 				<!-- loop hear all the sizes  -->
 				<%
 				List<Price> priceList = product.getPriceList();
@@ -125,11 +124,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 				%>
 			</div>
 
-			<p class="sizealert"></p>
-
 			<div class="buttons">
 				<button class="addtobag" id="bag">ADD TO BAG</button>
-				<!-- 				<button class="wishlist" id="wishlist">wishlisted</button> -->
 			</div>
 			<div class="product_details">
 				<h5>product information</h5>
@@ -193,7 +189,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 									<p class="attribute-value"><%=product.getRiseType()%></p>
 								</div>
 							</c:if>
-							
+
 							<c:if test="${not empty product.getClosureType()}">
 
 								<div class="components">
@@ -242,7 +238,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
    		// Add an event listener for each dropdown item
 		document.querySelectorAll('.dropdown-item').forEach(function(item) {
 			item.addEventListener('click', function() {
-				var selectedValue = item.getAttribute('value');
+				let selectedValue = item.getAttribute('value');
 				handleDropdownSelection(selectedValue);
 			});
 		});
@@ -251,52 +247,50 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 	
 		// Function to handle the dropdown item selection
 		 function handleDropdownSelection(value) {
-		   // Construct the URL based on the selected value
-		   var selectedCategory = encodeURIComponent(value); // Ensure value is properly encoded
+		   let selectedCategory = value; 
 		
-		   var redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
-		
-			// Redirect to the constructed URL
+		   let redirectURL = "<%=request.getContextPath()%>/products?category="+ selectedCategory;
+
 			window.location.href = redirectURL;
 			
 		}
 
 	        /* size script */	
-	        
-		
-        var priceData = {
-                // Define prices for each size
-                <%for (Price price : priceList) {%>
+        let priceData = {
+                // Define prices for each size in an object // {{1 : {300,10,244}} , {2 : {...}}}
+                <% for (Price price : priceList) { %>
                 
                     "<%=price.getSize().getId()%>": {
                     	"mrp_price":<%=(int) price.getPrice()%>,
                     	"offer":<%=price.getOffer()%>,
-                    	"current_price":<%=price.getCurrentPrice() %>
+                    	"current_price":<%=price.getCurrentPrice()%>
                     },
                     
                 <%}%>
             };
-
  
     	// selecting all the size radio 
-        var sizeRadios = document.querySelectorAll("input[name='rad']");
-        // default price to be shown
+        let sizeRadios = document.querySelectorAll("input[name='rad']");
+    	
+        // to show the default first price
         sizeRadios[0].checked = true;
         
-        var selectedPrice = document.querySelector(".current_price");
-        var selectedMrpPrice =  document.querySelector("#mrp_price");
-        var selectedOffer=  document.querySelector("#offer");
+        // to fill the content 
+        let selectedPrice = document.querySelector(".current_price");
+        let selectedMrpPrice =  document.querySelector("#mrp_price");
+        let selectedOffer=  document.querySelector("#offer");
         
         
       	// Add an event listener on change for each size radios 
         sizeRadios.forEach(function(radio) {
             radio.addEventListener("change", function() {
-                var selectedSize = radio.value;
+                let selectedSize = radio.value;
    
-                var selectedPriceData = priceData[selectedSize];
-              	var mrpPrice = selectedPriceData.mrp_price;
-                var offer = selectedPriceData.offer;
-                var cuurentPrice = selectedPriceData.current_price;
+                let selectedPriceData = priceData[selectedSize];
+                
+              	let mrpPrice = selectedPriceData.mrp_price;
+                let offer = selectedPriceData.offer;
+                let cuurentPrice = selectedPriceData.current_price;
                 
                 selectedPrice.textContent =  " RS." + cuurentPrice; 
                 selectedMrpPrice.textContent = "MRP RS."+ mrpPrice;
@@ -313,11 +307,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
         }
         
  
-        var firstSize = Object.keys(priceData)[0];
-        var firstPriceData = priceData[firstSize];
-        var mrpPrice = firstPriceData.mrp_price;
-        var offer = firstPriceData.offer;
-        var currentPrice = firstPriceData.current_price;
+        let firstSize = Object.keys(priceData)[0]; // [size-1 , 2 , 3]
+        let firstPriceData = priceData[firstSize];   
+        let mrpPrice = firstPriceData.mrp_price;
+        let offer = firstPriceData.offer;
+        let currentPrice = firstPriceData.current_price;
         
         selectedPrice.textContent = "RS." + currentPrice; // Display default price
         selectedMrpPrice.textContent = "MRP RS."+ mrpPrice;
@@ -332,7 +326,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
             const existInBag = url.searchParams.get("existInBag");
             
             if (existInBag === "1") {
-            	
                 Swal.fire({
               	  icon: 'warning',
               	  text: 'product aldready exist in bag!',
@@ -355,13 +348,13 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
         // Check for existInBag parameter on page load
         checkExistInBagParameter();
         
-        var acc = document.getElementsByClassName("accordion");
-        var i;
+        let acc = document.getElementsByClassName("accordion");
+        let i;
 
         for (i = 0; i < acc.length; i++) {
           acc[i].addEventListener("click", function () {
             this.classList.toggle("active");
-            var panel = this.nextElementSibling;
+            let panel = this.nextElementSibling;
             if (panel.style.display === "block") {
               panel.style.display = "none";
             } else {
@@ -371,11 +364,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
         }
 
     // on clicking the add to bag button
-
     document.getElementById("bag").addEventListener("click", function() {
-    	
-    	
-/*         var selectedSize = getSelectedSize(); */
         
         <%HttpSession httpSession = request.getSession(false);%>
         
@@ -396,22 +385,21 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
 
    
     	// selecting all the size radio 
-        var sizeRadios = document.querySelectorAll("input[name='rad']");
+        let sizeRadios = document.querySelectorAll("input[name='rad']");
     	
-    	var sizeId = getSelectedSize();
+    	let sizeId = getSelectedSize();
     	
         function getSelectedSize() {
-            for (var i = 0; i < sizeRadios.length; i++) {
+            for (let i = 0; i < sizeRadios.length; i++) {
                 if (sizeRadios[i].checked) {
-                	
-                	console.log()
+
                 	return sizeRadios[i].value;
                 }
             }
             return null; // Return null if no size is selected
         }
  		
- 		var productId = <%=product.getId()%>;
+ 		let productId = <%=product.getId()%>;
  		 
         // if the user logged in add to bag
 
@@ -434,13 +422,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.28/dist/sweetalert2.min.css
         		  title: 'product added to bag'
         		})
 
-	     var redirectURL = "user/bag?product_id=" + productId + "&size_id=" + sizeId; 
+	     let redirectURL = "user/bag?product_id=" + productId + "&size_id=" + sizeId; 
 	     
 	      window.location.href = redirectURL;
 	         
 	     	 }  
 	     	   
-        
         <%}%> 
                
     });

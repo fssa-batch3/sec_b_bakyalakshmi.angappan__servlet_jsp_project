@@ -31,6 +31,15 @@ div.location {
 
 }
 
+.sort_container{
+	    border-top: 1px #eee solid;
+    border-bottom: 1px #eee solid;
+    padding: 0.5%;
+    margin-bottom: 2%;
+      width: 92%;
+    margin-left: 4%;
+}
+
 .heading_top h1 {
     font-family: 'Jost', sans-serif;
     font-weight: 600;
@@ -183,7 +192,6 @@ div.ratings div {
 }
 small.totalproduct{
     color:grey;
-    margin-left: 30px;
 }
 
 /* div.ratings div.ratings_count {
@@ -208,6 +216,10 @@ div.ratings div.buyers_count {
 	margin-right:12px;
 }
 
+#pattern_toggle{
+	display:inline;
+}
+
 /* wishlist */
 
 /* .wishlist{
@@ -222,6 +234,29 @@ div.ratings div.buyers_count {
     left :4.5%;
 } */
 
+.page-link {
+    color: black; 
+}
+
+.page-link:first-child , .page-link:last-child {
+    font-weight: 400; 
+}
+
+.pagination{
+	border-color:none;
+}
+
+
+.page-link:hover {
+    color: black; 
+}
+
+.active>.page-link{
+	
+	background-color:#000;
+	color: #fff;
+	border-color:#000;
+}
 #mobile-header {
     display: none;
 }

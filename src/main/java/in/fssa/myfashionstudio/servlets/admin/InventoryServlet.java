@@ -27,7 +27,7 @@ public class InventoryServlet extends HttpServlet {
 
 		ProductService productService = new ProductService();
 		try {
-			List<ProductDTO> productList = productService.getAllProducts();
+			List<ProductDTO> productList = productService.getAllProducts(0, 0);
 			request.setAttribute("productList", productList);
 
 			request.getRequestDispatcher("/inventory.jsp").forward(request, response);

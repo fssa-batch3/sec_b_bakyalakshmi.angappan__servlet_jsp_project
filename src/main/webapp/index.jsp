@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="in.fssa.myfashionstudioapp.model.Price"%>
 <%@page import="in.fssa.myfashionstudioapp.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
@@ -34,22 +35,20 @@
 
 <!-- style for preloader  -->
 <style type="text/css">
-
-#preloader{
+#preloader {
 	background: #000;
 	height: 100vh;
-	width:100%;
-	position:fixed;
-	z-index:100;
+	width: 100%;
+	position: fixed;
+	z-index: 100;
 }
-
 </style>
 
 <title>My Fashion Studio</title>
 
 </head>
 
-<body>
+<body> 
 
 	<jsp:include page="header.jsp" />
 
@@ -57,11 +56,7 @@
 	List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
 	%>
 
-	<%
-	System.out.print(productList);
-	%>
-	
-	<div id="preloader" style="display:none;"></div> 
+	<!-- 	/*(List<ProductDTO>) request.getAttribute("productList")*/ -->
 
 	<!-- main content -->
 	<div class="container-fluid">
@@ -75,13 +70,13 @@
 					</div>
 
 					<div>
-						<img class="firstimg"
-							src="https://iili.io/JFR7hNf.png"
+						<img class="firstimg" src="https://iili.io/JFR7hNf.png"
 							alt="bannerimage">
 					</div>
 				</div>
 			</div>
 		</section>
+	</div>
 
 		<section>
 
@@ -91,11 +86,9 @@
 
 
 					<div onclick="redirectToProductsServlet(2)">
-
 						<!-- men shirts -->
 						<img src="./assets/images/categories_images/men-shirt.jpg" alt="">
 						<h4>shirts</h4>
-
 					</div>
 
 					<!-- men jeans -->
@@ -110,7 +103,6 @@
 					<div onclick="redirectToProductsServlet(1)">
 						<img src="./assets/images/categories_images/tshirt.jpg" alt="">
 						<h4>t-shirts</h4>
-
 					</div>
 
 
@@ -154,7 +146,6 @@
 						int loopCounter = 0;
 
 						for (ProductDTO product : productList) {
-							// Limit the loop to four iterations
 							if (loopCounter < 4) {
 						%>
 						<div class="smallcontainer"
@@ -167,18 +158,23 @@
 							<div class="names">
 								<h4 class="product_name"><%=product.getName()%></h4>
 							</div>
-						
-							<% Price price = product.getPriceList().get(0); %>
-						<div class="prices">
-					
-						
-							<span class="current_price">RS.<%= price.getCurrentPrice() %> </span><span class="mrp_price"><del>RS.<%= (int)price.getPrice() %></del></span><span
-								class="product_offer"> (<%= (int) price.getOffer() %> % off)</span>
-						</div>
-						
+
+							<%
+							Price price = product.getPriceList().get(0);
+							%>
+							<div class="prices">
+
+
+								<span class="current_price">RS.<%=price.getCurrentPrice()%>
+								</span><span class="mrp_price"><del>
+										RS.<%=(int) price.getPrice()%></del></span><span class="product_offer">
+									(<%=(int) price.getOffer()%> % off)
+								</span>
+							</div>
+
 						</div>
 						<%
-						// Increment the loop counter
+				
 						loopCounter++;
 						} // end if
 						} // end productList loop
@@ -189,6 +185,7 @@
 
 
 			</div>
+			
 		</section>
 
 		<section>
@@ -228,15 +225,6 @@
 		<script src="./js/vendor/bootstrap.bundle.js"></script>
 
 		<script type="text/javascript">
-
-		document.onreadystatechange = () => {
-			  if (document.readyState === "loading") {
-				  var loader = document.getElementById("preloader");
-				  loader.style.display="block"; 
-				  
-				  console.log("sdnjs");
-			  }
-		};
 		
 		/* header scripts */
 		
@@ -283,7 +271,7 @@
 		        window.location.href ="product?product_id="+ productId;
 		    }
 
-		</script> 
+		</script>
 </body>
 
 
